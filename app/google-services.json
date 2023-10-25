@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "313837961174",
+    "project_id": "aminandroid-45afc",
+    "storage_bucket": "aminandroid-45afc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:313837961174:android:53640639d344779897ae77",
+        "android_client_info": {
+          "package_name": "com.example.aminandroid"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADakVdbYIWZ3E8RYRJwHNa5w5QE2wwFps"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
