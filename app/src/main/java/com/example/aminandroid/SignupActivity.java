@@ -24,13 +24,9 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import static androidx.fragment.app.FragmentManager.TAG;
 
 public class SignupActivity extends AppCompatActivity {
-    EditText email;
-    EditText username;
-    EditText password;
-    EditText cpassword;
+    EditText email,username,password,cpassword,adminCode;
     Switch Isadmin;
-    TextView error;
-    EditText adminCode;
+    TextView error,goTo_login;
     Button signUpButton;
     private FirebaseAuth mAuth;
     @Override
@@ -46,6 +42,14 @@ public class SignupActivity extends AppCompatActivity {
         adminCode = findViewById(R.id.admin_code);
         mAuth = FirebaseAuth.getInstance();
         signUpButton = findViewById(R.id.signup_button);
+        goTo_login = findViewById(R.id.alreadyHaveAcc);
+        adminCode.setVisibility(View.GONE);
+        goTo_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(SignupActivity.this, LoginActivity.class));
+            }
+        });
 
         signUpButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -110,6 +114,7 @@ public class SignupActivity extends AppCompatActivity {
                                 }
                                 UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                                         .setDisplayName(name).build();
+                                mAuth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString());
                                 startActivity(new Intent(SignupActivity.this, MainActivity.class));
                             } else {
                                 // If sign in fails, display a message to the user.
