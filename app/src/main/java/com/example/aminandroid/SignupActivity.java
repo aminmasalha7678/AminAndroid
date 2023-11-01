@@ -95,7 +95,7 @@ public class SignupActivity extends AppCompatActivity {
             error.setVisibility(View.VISIBLE);
             error.setText("password doesn't match");
         }
-        else if (Isadmin.isChecked() && !adminCode.getText().toString().equals("1323548631")){
+        else if (Isadmin.isChecked() && !adminCode.getText().toString().equals("1")){
             error.setVisibility(View.VISIBLE);
             error.setText("admin code is incorrect");
         }
@@ -114,8 +114,14 @@ public class SignupActivity extends AppCompatActivity {
                                 }
                                 UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                                         .setDisplayName(name).build();
-                                mAuth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString());
-                                startActivity(new Intent(SignupActivity.this, MainActivity.class));
+                                user.updateProfile(profileUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        mAuth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString());
+                                        startActivity(new Intent(SignupActivity.this, MainActivity.class));
+                                    }
+                                });
+
                             } else {
                                 // If sign in fails, display a message to the user.
                                 error.setVisibility(View.VISIBLE);

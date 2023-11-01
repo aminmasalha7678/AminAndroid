@@ -8,40 +8,30 @@
         android:checkableBehavior="single">
 
         <item
-            android:id="@+id/nav_home"
+            android:id="@+id/admin_nav_home"
             android:icon="@drawable/baseline_home_24"
-            android:title="Home"/>
+            android:title="Main"/>
 
         <item
-            android:id="@+id/nav_settings"
-            android:icon="@drawable/baseline_app_settings_alt_24"
-            android:title="Settings"/>
+            android:id="@+id/admin_nav_player"
+            android:icon="@drawable/baseline_account_box_24"
+            android:title="Add Player"/>
 
         <item
-            android:id="@+id/nav_players"
+            android:id="@+id/admin_nav_team"
             android:icon="@drawable/baseline_account_box_24"
-            android:title="Players"/>
-
+            android:title="Add Team"/>
         <item
-            android:id="@+id/nav_teams"
+            android:id="@+id/admin_nav_game"
             android:icon="@drawable/baseline_account_box_24"
-            android:title="Teams"/>
-        <item
-            android:id="@+id/nav_games"
-            android:icon="@drawable/baseline_account_box_24"
-            android:title="Games"/>
-        <item
-            android:id="@+id/nav_admin"
-            android:icon="@drawable/baseline_account_box_24"
-            android:title="Admin"
-            android:visible="false" />
+            android:title="Add Game"/>
     </group>
     <item
         android:title="">
 
         <menu>
             <item
-                android:id="@+id/nav_logout"
+                android:id="@+id/admin_nav_logout"
                 android:icon="@drawable/baseline_roundabout_right_24"
                 android:title="Logout"/>
         </menu>
