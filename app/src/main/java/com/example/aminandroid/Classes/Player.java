@@ -5,6 +5,7 @@ import java.util.Arrays;
 public class Player {
 
     private String pid;
+    private String tid;
     private String name;
     private Team team;
     private int age;
@@ -14,7 +15,8 @@ public class Player {
 
     private Byte[] player_img;
 
-    public Player(String pid,String name, Team team, int age, int mvps, int championships, int points, Byte[] player_img) {
+    public Player(String tid,String pid,String name, Team team, int age, int mvps, int championships, int points, Byte[] player_img) {
+        this.tid = tid;
         this.pid = pid;
         this.name = name;
         this.team = team;
@@ -24,7 +26,8 @@ public class Player {
         this.points = points;
         this.player_img = player_img;
     }
-    public Player(String pid,String name, Team team, int age, int mvps, int championships, int points) {
+    public Player(String tid,String pid,String name, Team team, int age, int mvps, int championships, int points) {
+        this.tid = tid;
         this.pid = pid;
         this.name = name;
         this.team = team;
