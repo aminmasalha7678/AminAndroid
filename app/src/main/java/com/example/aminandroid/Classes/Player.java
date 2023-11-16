@@ -4,8 +4,8 @@ import java.util.Arrays;
 
 public class Player {
 
-    private String pid;
-    private String tid;
+    private String pid; // Player Id
+    private String tid; // Team Id
     private String name;
     private Team team;
     private int age;

@@ -1,5 +1,9 @@
 package com.example.aminandroid.Admin;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.MenuItem;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,10 +11,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.MenuItem;
-
+import com.example.aminandroid.Classes.Team;
 import com.example.aminandroid.Fragments.AddGameFragment;
 import com.example.aminandroid.Fragments.AddPlayerFragment;
 import com.example.aminandroid.Fragments.AddTeamFragment;
@@ -23,10 +24,13 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.ArrayList;
+
 public class AdminActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
     private FirebaseAuth mAuth;
+    public static ArrayList<Team> teams;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,5 +93,8 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
         } else {
             super.onBackPressed();
         }
+    }
+    public static ArrayList<Team> getTeams(){
+        return teams;
     }
 }

@@ -1,28 +1,38 @@
 package com.example.aminandroid.Classes;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class Team {
+
+    private String tid;
     private String name;
     private Byte[] team_img;
     private int championships;
     private int establishment; // the year the team was established
 
-    public Team(String name,Byte[] team_img, int championships,int establishment) {
+    public Team(String name, Byte[] team_img, int championships, int establishment) {
         this.name = name;
         this.team_img = team_img;
         this.championships = championships;
         this.establishment = establishment;
     }
 
-    public Team(String name, int championships,int establishment) {
+    public Team(String name, int championships, int establishment) {
         this.name = name;
         this.championships = championships;
         this.establishment = establishment;
     }
 
+
+
+    public Team(String tid, String name, int championships, int establishment) {
+
+        this.tid = tid;
+        this.name = name;
+        this.championships = championships;
+        this.establishment = establishment;
+
+    }
 
 
     public String getName() {
@@ -50,6 +60,21 @@ public class Team {
         this.championships = championships;
     }
 
+    public int getEstablishment() {
+        return establishment;
+    }
+
+    public void setEstablishment(int establishment) {
+        this.establishment = establishment;
+    }
+    public String getTid() {
+        return tid;
+    }
+
+    public void setTid(String tid) {
+        this.tid = tid;
+    }
+
     @Override
     public String toString() {
         return "Team{" +
@@ -59,5 +84,7 @@ public class Team {
                 '}';
     }
 }
+
+
 
 

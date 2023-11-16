@@ -31,7 +31,7 @@
         app:layout_constraintTop_toBottomOf="@+id/addplayer_image" />
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/addplayer_team"
         android:layout_width="189dp"
         android:layout_height="48dp"
         android:layout_marginEnd="120dp"
@@ -50,10 +50,10 @@
         android:inputType="number"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+        app:layout_constraintTop_toBottomOf="@+id/addplayer_team" />
 
     <EditText
-        android:id="@+id/editTextNumber2"
+        android:id="@+id/addplayer_mvps"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="100dp"
@@ -66,7 +66,7 @@
         app:layout_constraintTop_toBottomOf="@+id/addplayer_age" />
 
     <EditText
-        android:id="@+id/editTextNumber3"
+        android:id="@+id/addplayer_champions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="100dp"
@@ -76,10 +76,10 @@
         android:inputType="number"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNumber2" />
+        app:layout_constraintTop_toBottomOf="@+id/addplayer_mvps" />
 
     <EditText
-        android:id="@+id/editTextNumber4"
+        android:id="@+id/addplayer_points"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="100dp"
@@ -89,15 +89,15 @@
         android:inputType="number"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNumber3" />
+        app:layout_constraintTop_toBottomOf="@+id/addplayer_champions" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/addplayer_button"
         android:layout_width="191dp"
         android:layout_height="51dp"
         android:layout_marginEnd="108dp"
         android:layout_marginTop="27dp"
         android:text="Add Player"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNumber4" />
+        app:layout_constraintTop_toBottomOf="@+id/addplayer_points" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,11 +1,6 @@
 package com.example.aminandroid.Fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,16 +8,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+
 import com.example.aminandroid.Admin.AdminActivity;
-import com.example.aminandroid.Classes.Player;
 import com.example.aminandroid.Classes.Team;
 import com.example.aminandroid.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,6 +33,8 @@ public class AddTeamFragment extends Fragment implements View.OnClickListener {
     EditText teamName,teamYear,teamChampion;
     Button addTeam;
     private DatabaseReference mDatabase;
+
+
 
 
 
@@ -102,14 +98,16 @@ public class AddTeamFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if(view.getId() == R.id.addteam_button){
-
             Team team = new Team(teamName.getText().toString(),Integer.parseInt(teamChampion.getText().toString()),Integer.parseInt(teamYear.getText().toString()));
-            mDatabase.child("Teams").push().setValue(team);
+            DatabaseReference pushTeam = mDatabase.child("Teams").push();
+            team.setTid(pushTeam.getKey());
+            pushTeam.setValue(team);
+            ArrayList<Team> teams = AdminActivity.getTeams();
+            teams.add(team);
             Toast.makeText(getContext(),"Team Added Succesfully",Toast.LENGTH_SHORT).show();
             teamName.setText("");
             teamChampion.setText("");
             teamYear.setText("");
-
         }
     }
 
