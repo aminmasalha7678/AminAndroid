@@ -30,7 +30,6 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
 
     private DrawerLayout drawerLayout;
     private FirebaseAuth mAuth;
-    public static ArrayList<Team> teams;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +44,7 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
         NavigationView navigationView = findViewById(R.id.admin_nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        if(user == null || !user.getDisplayName().startsWith("admin: ")){
+        if (user == null || !user.getDisplayName().startsWith("admin: ")) {
             startActivity(new Intent(AdminActivity.this, SignupActivity.class));
         }
 
@@ -64,20 +63,15 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.admin_nav_home) {
             getSupportFragmentManager().beginTransaction().replace(R.id.admin_fragment_container, new HomeFragment()).commit();
-        }
-        else if (item.getItemId() == R.id.admin_nav_team) {
+        } else if (item.getItemId() == R.id.admin_nav_team) {
             getSupportFragmentManager().beginTransaction().replace(R.id.admin_fragment_container, new AddTeamFragment()).commit();
-        }
-        else if (item.getItemId() == R.id.admin_nav_player) {
+        } else if (item.getItemId() == R.id.admin_nav_player) {
             getSupportFragmentManager().beginTransaction().replace(R.id.admin_fragment_container, new AddPlayerFragment()).commit();
-        }
-        else if (item.getItemId() == R.id.admin_nav_game) {
+        } else if (item.getItemId() == R.id.admin_nav_game) {
             getSupportFragmentManager().beginTransaction().replace(R.id.admin_fragment_container, new AddGameFragment()).commit();
-        }
-        else if (item.getItemId() == R.id.admin_nav_go_back) {
+        } else if (item.getItemId() == R.id.admin_nav_go_back) {
             startActivity(new Intent(AdminActivity.this, MainActivity.class));
-        }
-        else if (item.getItemId() == R.id.admin_nav_logout) {
+        } else if (item.getItemId() == R.id.admin_nav_logout) {
             mAuth.signOut();
             startActivity(new Intent(AdminActivity.this, LoginActivity.class));
         }
@@ -93,8 +87,5 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
         } else {
             super.onBackPressed();
         }
-    }
-    public static ArrayList<Team> getTeams(){
-        return teams;
     }
 }

@@ -1,25 +1,36 @@
 package com.example.aminandroid.Fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.example.aminandroid.Classes.Team;
 import com.example.aminandroid.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link AddPlayerFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AddPlayerFragment extends Fragment implements View.OnClickListener {
+public class AddPlayerFragment extends Fragment implements View.OnClickListener, ValueEventListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -30,10 +41,11 @@ public class AddPlayerFragment extends Fragment implements View.OnClickListener 
     private String mParam1;
     private String mParam2;
 
-    EditText playerName,playerAge,playerMvps,playerChampions,playerPoints;
+    EditText playerName, playerAge, playerMvps, playerChampions, playerPoints;
     Button addPlayer;
     Spinner playerTeam;
     DatabaseReference mDatabase;
+    ArrayList<String> teamNames;
 
     public AddPlayerFragment() {
         // Required empty public constructor
@@ -74,6 +86,8 @@ public class AddPlayerFragment extends Fragment implements View.OnClickListener 
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_add_player, container, false);
 
+        mDatabase = FirebaseDatabase.getInstance("https://aminandroid-45afc-default-rtdb.europe-west1.firebasedatabase.app/").getReference();
+
         playerName = (EditText) v.findViewById(R.id.addplayer_name);
         playerAge = (EditText) v.findViewById(R.id.addplayer_age);
         playerChampions = (EditText) v.findViewById(R.id.addplayer_champions);
@@ -81,19 +95,68 @@ public class AddPlayerFragment extends Fragment implements View.OnClickListener 
         playerMvps = (EditText) v.findViewById(R.id.addplayer_mvps);
         playerTeam = (Spinner) v.findViewById(R.id.addplayer_team);
         addPlayer = (Button) v.findViewById(R.id.addplayer_button);
-        
+
 
         addPlayer.setOnClickListener(this);
 
-        mDatabase = FirebaseDatabase.getInstance("https://aminandroid-45afc-default-rtdb.europe-west1.firebasedatabase.app/").getReference();
+        teamNames = new ArrayList<String>();
+        mDatabase.child("Teams").addValueEventListener(this);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, teamNames);
+        playerTeam.setAdapter(adapter);
+        playerTeam.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                String selectedValue = teamNames.get(position);
+                compare(selectedValue);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         return v;
     }
 
     @Override
     public void onClick(View v) {
-        if(v.getId() == R.id.addplayer_button){
+        if (v.getId() == R.id.addplayer_button) {
 
         }
+    }
+
+    @Override
+    public void onDataChange(@NonNull DataSnapshot snapshot) {
+        teamNames.clear();
+        for (DataSnapshot ds : snapshot.getChildren()) {
+            String name = String.valueOf(ds.child(snapshot.getKey()).child("name"));
+            teamNames.add(name);
+        }
+    }
+
+    @Override
+    public void onCancelled(@NonNull DatabaseError error) {
+
+    }
+
+    public void compare(String selectedValue) {
+        mDatabase.child("Teams").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    if (ds.child(snapshot.getKey()).child("name").equals(selectedValue)) {
+                        String Tid = String.valueOf(ds.child(snapshot.getKey()).child("tid"));
+                        break;
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }

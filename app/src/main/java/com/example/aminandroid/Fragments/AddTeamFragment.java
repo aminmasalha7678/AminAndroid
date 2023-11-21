@@ -102,8 +102,6 @@ public class AddTeamFragment extends Fragment implements View.OnClickListener {
             DatabaseReference pushTeam = mDatabase.child("Teams").push();
             team.setTid(pushTeam.getKey());
             pushTeam.setValue(team);
-            ArrayList<Team> teams = AdminActivity.getTeams();
-            teams.add(team);
             Toast.makeText(getContext(),"Team Added Succesfully",Toast.LENGTH_SHORT).show();
             teamName.setText("");
             teamChampion.setText("");
