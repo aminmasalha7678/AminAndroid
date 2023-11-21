@@ -10,10 +10,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.example.aminandroid.Classes.Player;
 import com.example.aminandroid.Classes.Team;
 import com.example.aminandroid.R;
 import com.google.firebase.database.DataSnapshot;
@@ -30,7 +32,7 @@ import java.util.ArrayList;
  * Use the {@link AddPlayerFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AddPlayerFragment extends Fragment implements View.OnClickListener, ValueEventListener {
+public class AddPlayerFragment extends Fragment implements View.OnClickListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -42,6 +44,7 @@ public class AddPlayerFragment extends Fragment implements View.OnClickListener,
     private String mParam2;
 
     EditText playerName, playerAge, playerMvps, playerChampions, playerPoints;
+    String playerTeamId;
     Button addPlayer;
     Spinner playerTeam;
     DatabaseReference mDatabase;
@@ -100,7 +103,21 @@ public class AddPlayerFragment extends Fragment implements View.OnClickListener,
         addPlayer.setOnClickListener(this);
 
         teamNames = new ArrayList<String>();
-        mDatabase.child("Teams").addValueEventListener(this);
+        mDatabase.child("Teams").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                teamNames.clear();
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    String name = String.valueOf(ds.child("name").getValue());
+                    teamNames.add(name);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, teamNames);
         playerTeam.setAdapter(adapter);
@@ -124,31 +141,30 @@ public class AddPlayerFragment extends Fragment implements View.OnClickListener,
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.addplayer_button) {
+            Player player = new Player(playerTeamId,playerName.getText().toString(),Integer.parseInt(playerAge.getText().toString()),Integer.parseInt(playerMvps.getText().toString()),Integer.parseInt(playerChampions.getText().toString()),Integer.parseInt(playerPoints.getText().toString()));
+            DatabaseReference pushPlayer = mDatabase.child("Players").push();
+            Log.d("soifjh",playerTeamId+"iuh");
+            player.setPid(pushPlayer.getKey());
+            pushPlayer.setValue(player);
+            Toast.makeText(getContext(),"Player Added Succesfully",Toast.LENGTH_SHORT).show();
+            playerName.setText("");
+            playerAge.setText("");
+            playerMvps.setText("");
+            playerChampions.setText("");
+            playerPoints.setText("");
 
         }
     }
 
-    @Override
-    public void onDataChange(@NonNull DataSnapshot snapshot) {
-        teamNames.clear();
-        for (DataSnapshot ds : snapshot.getChildren()) {
-            String name = String.valueOf(ds.child(snapshot.getKey()).child("name"));
-            teamNames.add(name);
-        }
-    }
 
-    @Override
-    public void onCancelled(@NonNull DatabaseError error) {
-
-    }
 
     public void compare(String selectedValue) {
         mDatabase.child("Teams").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot ds : snapshot.getChildren()) {
-                    if (ds.child(snapshot.getKey()).child("name").equals(selectedValue)) {
-                        String Tid = String.valueOf(ds.child(snapshot.getKey()).child("tid"));
+                    if (ds.child("name").equals(selectedValue)) {
+                        playerTeamId = String.valueOf(ds.child("tid"));
                         break;
                     }
                 }

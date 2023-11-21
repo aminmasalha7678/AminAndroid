@@ -15,22 +15,28 @@ public class Player {
 
     private Byte[] player_img;
 
-    public Player(String tid,String pid,String name, Team team, int age, int mvps, int championships, int points, Byte[] player_img) {
+    public Player(String tid,String pid,String name, int age, int mvps, int championships, int points, Byte[] player_img) {
         this.tid = tid;
         this.pid = pid;
         this.name = name;
-        this.team = team;
         this.age = age;
         this.mvps = mvps;
         this.championships = championships;
         this.points = points;
         this.player_img = player_img;
     }
-    public Player(String tid,String pid,String name, Team team, int age, int mvps, int championships, int points) {
+    public Player(String tid,String pid,String name, int age, int mvps, int championships, int points) {
         this.tid = tid;
         this.pid = pid;
         this.name = name;
-        this.team = team;
+        this.age = age;
+        this.mvps = mvps;
+        this.championships = championships;
+        this.points = points;
+    }
+    public Player(String tid,String name, int age, int mvps, int championships, int points) {
+        this.tid = tid;
+        this.name = name;
         this.age = age;
         this.mvps = mvps;
         this.championships = championships;
