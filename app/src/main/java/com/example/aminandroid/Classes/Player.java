@@ -7,7 +7,6 @@ public class Player {
     private String pid; // Player Id
     private String tid; // Team Id
     private String name;
-    private Team team;
     private int age;
     private int mvps;
     private int points;
@@ -44,7 +43,13 @@ public class Player {
     }
 
 
+    public String getTid() {
+        return tid;
+    }
 
+    public void setTid(String tid) {
+        this.tid = tid;
+    }
 
     public String getName() {
         return name;
@@ -53,15 +58,6 @@ public class Player {
     public void setName(String name) {
         this.name = name;
     }
-
-    public Team getTeam() {
-        return team;
-    }
-
-    public void setTeam(Team team) {
-        this.team = team;
-    }
-
     public int getAge() {
         return age;
     }
@@ -113,7 +109,6 @@ public class Player {
     public String toString() {
         return "Player{" +
                 "name='" + name + '\'' +
-                ", team=" + team +
                 ", age=" + age +
                 ", championships=" + championships +
                 ", mvps=" + mvps +
