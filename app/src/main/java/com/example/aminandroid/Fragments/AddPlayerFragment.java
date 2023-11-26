@@ -1,7 +1,8 @@
 package com.example.aminandroid.Fragments;
 
-import android.graphics.Color;
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,15 +11,14 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.aminandroid.Classes.Player;
-import com.example.aminandroid.Classes.Team;
 import com.example.aminandroid.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,8 +30,10 @@ import java.util.ArrayList;
 
 
 public class AddPlayerFragment extends Fragment implements View.OnClickListener,AdapterView.OnItemSelectedListener {
+    private static int RESULT_LOAD_IMAGE = 1;
     EditText playerName, playerAge, playerMvps, playerChampions, playerPoints;
     Button addPlayer;
+    ImageButton playerImage;
     Spinner playerTeam;
     DatabaseReference mDatabase;
     ArrayList<String> teamNames,teamId;
@@ -45,6 +47,7 @@ public class AddPlayerFragment extends Fragment implements View.OnClickListener,
 
         mDatabase = FirebaseDatabase.getInstance("https://aminandroid-45afc-default-rtdb.europe-west1.firebasedatabase.app/").getReference();
 
+        playerImage = (ImageButton) v.findViewById(R.id.addplayer_image);
         playerName = (EditText) v.findViewById(R.id.addplayer_name);
         playerAge = (EditText) v.findViewById(R.id.addplayer_age);
         playerChampions = (EditText) v.findViewById(R.id.addplayer_champions);
@@ -53,13 +56,10 @@ public class AddPlayerFragment extends Fragment implements View.OnClickListener,
         playerTeam = (Spinner) v.findViewById(R.id.addplayer_team);
         addPlayer = (Button) v.findViewById(R.id.addplayer_button);
 
-
+        playerImage.setOnClickListener(this);
         addPlayer.setOnClickListener(this);
         fillTeamsNameAndId();
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, teamNames);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        playerTeam.setAdapter(adapter);
-        playerTeam.setOnItemSelectedListener(this);
+
 
         return v;
     }
@@ -76,6 +76,15 @@ public class AddPlayerFragment extends Fragment implements View.OnClickListener,
                     teamNames.add(name);
                     teamId.add(id);
                 }
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, teamNames);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                playerTeam.setAdapter(adapter);
+
+                // Notify the adapter that the data set has changed
+                adapter.notifyDataSetChanged();
+
+                // Set the listener after the adapter is set
+                playerTeam.setOnItemSelectedListener(AddPlayerFragment.this);
             }
 
             @Override
@@ -100,12 +109,16 @@ public class AddPlayerFragment extends Fragment implements View.OnClickListener,
             playerPoints.setText("");
 
         }
+        if(v.getId() == R.id.addplayer_image){
+            Intent gallery = new Intent(Intent.ACTION_PICK,
+                    MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+            startActivityForResult(gallery, RESULT_LOAD_IMAGE);
+        }
     }
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         Log.d("item", "dddddd");
-        ((TextView) adapterView.getChildAt(i)).setTextColor(Color.BLACK);
         selectedId = teamId.get(i);
     }
 
@@ -113,4 +126,5 @@ public class AddPlayerFragment extends Fragment implements View.OnClickListener,
     public void onNothingSelected(AdapterView<?> adapterView) {
 
     }
+
 }

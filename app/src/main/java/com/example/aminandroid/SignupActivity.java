@@ -1,18 +1,16 @@
 package com.example.aminandroid;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -20,8 +18,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
-
-import static androidx.fragment.app.FragmentManager.TAG;
 
 public class SignupActivity extends AppCompatActivity {
     EditText email,username,password,cpassword,adminCode;
@@ -37,8 +33,8 @@ public class SignupActivity extends AppCompatActivity {
         username = findViewById(R.id.signup_username);
         password = findViewById(R.id.signup_password);
         cpassword = findViewById(R.id.signup_cpassword);
-        Isadmin = findViewById(R.id.admin_switch);
         error = findViewById(R.id.signup_error);
+        Isadmin = findViewById(R.id.admin_switch);
         adminCode = findViewById(R.id.admin_code);
         mAuth = FirebaseAuth.getInstance();
         signUpButton = findViewById(R.id.signup_button);
@@ -64,7 +60,6 @@ public class SignupActivity extends AppCompatActivity {
             {
                 if (isChecked)
                 {
-
                     adminCode.setVisibility(View.VISIBLE);
                 }
                 else {
@@ -86,6 +81,10 @@ public class SignupActivity extends AppCompatActivity {
         else if(username.getText().toString().equals("")){
             error.setVisibility(View.VISIBLE);
             error.setText("Please enter your username");
+        }
+        else if(username.getText().toString().startsWith("admin: ")){
+            error.setVisibility(View.VISIBLE);
+            error.setText("No.");
         }
         else if(password.getText().toString().equals("")){
             error.setVisibility(View.VISIBLE);
@@ -110,7 +109,7 @@ public class SignupActivity extends AppCompatActivity {
                                 String name = username.getText().toString();
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 if(Isadmin.isChecked()){
-                                    name= "admin: "+name;
+                                    name = "admin: "+name;
                                 }
                                 UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                                         .setDisplayName(name).build();
