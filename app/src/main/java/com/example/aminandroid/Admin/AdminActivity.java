@@ -11,11 +11,10 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.example.aminandroid.Classes.Team;
-import com.example.aminandroid.Fragments.AddGameFragment;
-import com.example.aminandroid.Fragments.AddPlayerFragment;
-import com.example.aminandroid.Fragments.AddTeamFragment;
-import com.example.aminandroid.Fragments.HomeFragment;
+import com.example.aminandroid.Admin.AdminFragments.AddPlayerFragment;
+import com.example.aminandroid.Admin.AdminFragments.AddTeamFragment;
+import com.example.aminandroid.Admin.AdminFragments.AdminHomeFragment;
+
 import com.example.aminandroid.LoginActivity;
 import com.example.aminandroid.MainActivity;
 import com.example.aminandroid.R;
@@ -23,8 +22,6 @@ import com.example.aminandroid.SignupActivity;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-import java.util.ArrayList;
 
 public class AdminActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -54,7 +51,7 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
         toggle.syncState();
 
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.admin_fragment_container, new HomeFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.admin_fragment_container, new AdminHomeFragment()).commit();
             navigationView.setCheckedItem(R.id.admin_nav_home);
         }
     }
@@ -62,14 +59,12 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.admin_nav_home) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.admin_fragment_container, new HomeFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.admin_fragment_container, new AdminHomeFragment()).commit();
         } else if (item.getItemId() == R.id.admin_nav_team) {
             getSupportFragmentManager().beginTransaction().replace(R.id.admin_fragment_container, new AddTeamFragment()).commit();
         } else if (item.getItemId() == R.id.admin_nav_player) {
             getSupportFragmentManager().beginTransaction().replace(R.id.admin_fragment_container, new AddPlayerFragment()).commit();
-        } else if (item.getItemId() == R.id.admin_nav_game) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.admin_fragment_container, new AddGameFragment()).commit();
-        } else if (item.getItemId() == R.id.admin_nav_go_back) {
+        }else if (item.getItemId() == R.id.admin_nav_go_back) {
             startActivity(new Intent(AdminActivity.this, MainActivity.class));
         } else if (item.getItemId() == R.id.admin_nav_logout) {
             mAuth.signOut();

@@ -1,4 +1,4 @@
-package com.example.aminandroid.Fragments;
+package com.example.aminandroid.Admin.AdminFragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,63 +18,13 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link AddTeamFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class AddTeamFragment extends Fragment implements View.OnClickListener {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+public class AddTeamFragment extends Fragment implements View.OnClickListener {
 
     EditText teamName,teamYear,teamChampion;
     Button addTeam;
     private DatabaseReference mDatabase;
 
-
-
-
-
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public AddTeamFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment AddTeamFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static AddTeamFragment newInstance(String param1, String param2) {
-        AddTeamFragment fragment = new AddTeamFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-
-
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

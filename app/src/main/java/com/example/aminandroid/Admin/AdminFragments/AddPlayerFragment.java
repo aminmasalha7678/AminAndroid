@@ -1,4 +1,4 @@
-package com.example.aminandroid.Fragments;
+package com.example.aminandroid.Admin.AdminFragments;
 
 import android.content.Intent;
 import android.os.Bundle;

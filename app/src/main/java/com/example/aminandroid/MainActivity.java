@@ -14,11 +14,11 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.aminandroid.Admin.AdminActivity;
-import com.example.aminandroid.Fragments.GameFragment;
-import com.example.aminandroid.Fragments.HomeFragment;
-import com.example.aminandroid.Fragments.PlayerFragment;
-import com.example.aminandroid.Fragments.SettingsFragment;
-import com.example.aminandroid.Fragments.TeamFragment;
+import com.example.aminandroid.ClientFragments.GameFragment;
+import com.example.aminandroid.ClientFragments.HomeFragment;
+import com.example.aminandroid.ClientFragments.PlayerFragment;
+import com.example.aminandroid.ClientFragments.SettingsFragment;
+import com.example.aminandroid.ClientFragments.TeamFragment;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

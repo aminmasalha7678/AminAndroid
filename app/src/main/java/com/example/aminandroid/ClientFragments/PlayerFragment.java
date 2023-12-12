@@ -1,4 +1,4 @@
-package com.example.aminandroid.Fragments;
+package com.example.aminandroid.ClientFragments;
 
 import android.os.Bundle;
 
