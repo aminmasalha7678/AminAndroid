@@ -98,7 +98,6 @@ public class AddPlayerFragment extends Fragment implements View.OnClickListener,
         if (v.getId() == R.id.addplayer_button) {
             Player player = new Player(selectedId,playerName.getText().toString(),Integer.parseInt(playerAge.getText().toString()),Integer.parseInt(playerMvps.getText().toString()),Integer.parseInt(playerChampions.getText().toString()),Integer.parseInt(playerPoints.getText().toString()));
             DatabaseReference pushPlayer = mDatabase.child("Players").push();
-            Log.d("hello",selectedId+"iuh");
             player.setPid(pushPlayer.getKey());
             pushPlayer.setValue(player);
             Toast.makeText(getContext(),"Player Added Succesfully",Toast.LENGTH_SHORT).show();
@@ -118,7 +117,6 @@ public class AddPlayerFragment extends Fragment implements View.OnClickListener,
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        Log.d("item", "dddddd");
         selectedId = teamId.get(i);
     }
 
