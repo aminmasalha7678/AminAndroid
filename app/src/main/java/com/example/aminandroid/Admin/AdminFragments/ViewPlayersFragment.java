@@ -1,17 +1,16 @@
 package com.example.aminandroid.Admin.AdminFragments;
 
+import static java.lang.Integer.parseInt;
+
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.example.aminandroid.Admin.PlayerAdapter;
 import com.example.aminandroid.Classes.Player;
@@ -24,8 +23,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static java.lang.Integer.parseInt;
 
 
 public class ViewPlayersFragment extends Fragment {
@@ -45,27 +42,9 @@ public class ViewPlayersFragment extends Fragment {
         Players = new ArrayList<>();
         adapter = new PlayerAdapter(inflater.getContext(), Players);
         recyclerView.setAdapter(adapter);
-        mDatabase.child("Players").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot ds : snapshot.getChildren()) {
-                    Players.add(new Player(String.valueOf(ds.child("tid").getValue()),
-                            String.valueOf(ds.child("name").getValue()),
-                            parseInt(String.valueOf(ds.child("age").getValue())),
-                            parseInt(String.valueOf(ds.child("mvps").getValue())),
-                            parseInt(String.valueOf(ds.child("championships").getValue())),
-                            parseInt(String.valueOf(ds.child("points").getValue()))));
-                }
-                adapter.notifyDataSetChanged();
 
+        fillPlayerInfo();
 
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
         return v;
     }
 
@@ -75,15 +54,17 @@ public class ViewPlayersFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot ds : snapshot.getChildren()) {
-                    p.add(new Player(String.valueOf(ds.child("tid").getValue()),
+                    Players.add(new Player(String.valueOf(ds.child("tid").getValue()),
+                            String.valueOf(ds.child("pid").getValue()),
                             String.valueOf(ds.child("name").getValue()),
                             parseInt(String.valueOf(ds.child("age").getValue())),
                             parseInt(String.valueOf(ds.child("mvps").getValue())),
                             parseInt(String.valueOf(ds.child("championships").getValue())),
                             parseInt(String.valueOf(ds.child("points").getValue()))));
-
                 }
-                Log.d("dsfds",p.get(0).getName());
+                adapter.notifyDataSetChanged();
+
+
             }
 
             @Override

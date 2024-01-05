@@ -21,10 +21,7 @@
             android:id="@+id/admin_nav_team"
             android:icon="@drawable/baseline_account_box_24"
             android:title="Add Team"/>
-        <item
-            android:id="@+id/admin_nav_game"
-            android:icon="@drawable/baseline_account_box_24"
-            android:title="Add Game"/>
+
     </group>
     <item
         android:title="">
