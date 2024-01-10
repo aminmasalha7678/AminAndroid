@@ -115,11 +115,11 @@ public class Player {
     }
 
     public int getPhysical() {
-        return Physical;
+        return physical;
     }
 
     public void setPhysical(int physical) {
-        Physical = physical;
+        this.physical = physical;
     }
 
     public Byte[] getPlayer_img() {
@@ -141,7 +141,7 @@ public class Player {
                 ", passing=" + passing +
                 ", dribbling=" + dribbling +
                 ", defense=" + defense +
-                ", Physical=" + Physical +
+                ", Physical=" + physical +
                 ", player_img=" + Arrays.toString(player_img) +
                 '}';
     }
