@@ -37,14 +37,11 @@ public class UpdateActivity extends AppCompatActivity implements View.OnClickLis
     Button update,delete,goBack;
     DatabaseReference mDatabase;
     ArrayList<String> teamNames,teamId;
-    TextView Hallo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update);
         id = getIntent().getStringExtra("id");
-        Hallo = findViewById(R.id.Hallo);
-        Hallo.setText(id);
         info = getIntent().getStringExtra("info");
         updateImage = findViewById(R.id.update_image);
         name = findViewById(R.id.update_name);
@@ -102,6 +99,8 @@ public class UpdateActivity extends AppCompatActivity implements View.OnClickLis
                         Integer.parseInt(playerAge.getText().toString()),
                         Integer.parseInt(playerMvp.getText().toString()),
                         Integer.parseInt(playerChampions.getText().toString()),
+                        Integer.parseInt(playerAge.getText().toString()),
+                        Integer.parseInt(playerAge.getText().toString()),
                         Integer.parseInt(playerPoints.getText().toString())));
             }
         }

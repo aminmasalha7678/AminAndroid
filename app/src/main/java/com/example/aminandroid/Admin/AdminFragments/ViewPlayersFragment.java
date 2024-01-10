@@ -54,13 +54,15 @@ public class ViewPlayersFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot ds : snapshot.getChildren()) {
-                    Players.add(new Player(String.valueOf(ds.child("tid").getValue()),
-                            String.valueOf(ds.child("pid").getValue()),
+                    Players.add(new Player(String.valueOf(ds.child("pid").getValue()),
+                            String.valueOf(ds.child("tid").getValue()),
                             String.valueOf(ds.child("name").getValue()),
-                            parseInt(String.valueOf(ds.child("age").getValue())),
-                            parseInt(String.valueOf(ds.child("mvps").getValue())),
-                            parseInt(String.valueOf(ds.child("championships").getValue())),
-                            parseInt(String.valueOf(ds.child("points").getValue()))));
+                            parseInt(String.valueOf(ds.child("pace").getValue())),
+                            parseInt(String.valueOf(ds.child("shooting").getValue())),
+                            parseInt(String.valueOf(ds.child("passing").getValue())),
+                            parseInt(String.valueOf(ds.child("dribbling").getValue())),
+                            parseInt(String.valueOf(ds.child("defense").getValue())),
+                            parseInt(String.valueOf(ds.child("physical").getValue()))));
                 }
                 adapter.notifyDataSetChanged();
 

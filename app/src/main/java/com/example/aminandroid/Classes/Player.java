@@ -7,41 +7,56 @@ public class Player {
     private String pid; // Player Id
     private String tid; // Team Id
     private String name;
-    private int age;
-    private int mvps;
-    private int points;
-    private int championships;
-
+    private int pace;
+    private int shooting;
+    private int passing;
+    private int dribbling;
+    private int defense;
+    private int physical;
     private Byte[] player_img;
 
-    public Player(String tid,String pid,String name, int age, int mvps, int championships, int points, Byte[] player_img) {
-        this.tid = tid;
+    public Player(String pid, String tid, String name, int pace, int shooting, int passing, int dribbling, int defense, int physical, Byte[] player_img) {
         this.pid = pid;
+        this.tid = tid;
         this.name = name;
-        this.age = age;
-        this.mvps = mvps;
-        this.championships = championships;
-        this.points = points;
+        this.pace = pace;
+        this.shooting = shooting;
+        this.passing = passing;
+        this.dribbling = dribbling;
+        this.defense = defense;
+        this.physical = physical;
         this.player_img = player_img;
     }
-    public Player(String tid,String pid,String name, int age, int mvps, int championships, int points) {
-        this.tid = tid;
+    public Player(String pid, String tid, String name, int pace, int shooting, int passing, int dribbling, int defense, int physical) {
         this.pid = pid;
-        this.name = name;
-        this.age = age;
-        this.mvps = mvps;
-        this.championships = championships;
-        this.points = points;
-    }
-    public Player(String tid,String name, int age, int mvps, int championships, int points) {
         this.tid = tid;
         this.name = name;
-        this.age = age;
-        this.mvps = mvps;
-        this.championships = championships;
-        this.points = points;
+        this.pace = pace;
+        this.shooting = shooting;
+        this.passing = passing;
+        this.dribbling = dribbling;
+        this.defense = defense;
+        this.physical = physical;
+    }
+    public Player(String tid, String name, int pace, int shooting, int passing, int dribbling, int defense, int physical) {
+        this.tid = tid;
+        this.name = name;
+        this.pace = pace;
+        this.shooting = shooting;
+        this.passing = passing;
+        this.dribbling = dribbling;
+        this.defense = defense;
+        this.physical = physical;
     }
 
+
+    public String getPid() {
+        return pid;
+    }
+
+    public void setPid(String pid) {
+        this.pid = pid;
+    }
 
     public String getTid() {
         return tid;
@@ -58,44 +73,53 @@ public class Player {
     public void setName(String name) {
         this.name = name;
     }
-    public int getAge() {
-        return age;
+
+    public int getPace() {
+        return pace;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setPace(int pace) {
+        this.pace = pace;
     }
 
-    public String getPid() {
-        return pid;
+    public int getShooting() {
+        return shooting;
     }
 
-    public void setPid(String pid) {
-        this.pid = pid;
+    public void setShooting(int shooting) {
+        this.shooting = shooting;
     }
 
-    public int getMvps() {
-        return mvps;
+    public int getPassing() {
+        return passing;
     }
 
-    public void setMvps(int mvps) {
-        this.mvps = mvps;
+    public void setPassing(int passing) {
+        this.passing = passing;
     }
 
-    public int getChampionships() {
-        return championships;
+    public int getDribbling() {
+        return dribbling;
     }
 
-    public void setChampionships(int championships) {
-        this.championships = championships;
+    public void setDribbling(int dribbling) {
+        this.dribbling = dribbling;
     }
 
-    public int getPoints() {
-        return points;
+    public int getDefense() {
+        return defense;
     }
 
-    public void setPoints(int points) {
-        this.points = points;
+    public void setDefense(int defense) {
+        this.defense = defense;
+    }
+
+    public int getPhysical() {
+        return Physical;
+    }
+
+    public void setPhysical(int physical) {
+        Physical = physical;
     }
 
     public Byte[] getPlayer_img() {
@@ -105,14 +129,19 @@ public class Player {
     public void setPlayer_img(Byte[] player_img) {
         this.player_img = player_img;
     }
+
     @Override
     public String toString() {
         return "Player{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                ", championships=" + championships +
-                ", mvps=" + mvps +
-                ", points=" + points +
+                "pid='" + pid + '\'' +
+                ", tid='" + tid + '\'' +
+                ", name='" + name + '\'' +
+                ", pace=" + pace +
+                ", shooting=" + shooting +
+                ", passing=" + passing +
+                ", dribbling=" + dribbling +
+                ", defense=" + defense +
+                ", Physical=" + Physical +
                 ", player_img=" + Arrays.toString(player_img) +
                 '}';
     }

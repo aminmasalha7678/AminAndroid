@@ -3,7 +3,6 @@ package com.example.aminandroid.Admin.AdminFragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,10 +30,10 @@ import java.util.ArrayList;
 
 public class AddPlayerFragment extends Fragment implements View.OnClickListener,AdapterView.OnItemSelectedListener {
     private static int RESULT_LOAD_IMAGE = 1;
-    EditText playerName, playerAge, playerMvps, playerChampions, playerPoints;
+    EditText playerName, playerPace, playerShooting, playerPassing, playerDribbling, playerDefense, playerPhysical;
     Button addPlayer;
     ImageButton playerImage;
-    Spinner playerTeam;
+    Spinner playerTeam,playerPosition;
     DatabaseReference mDatabase;
     ArrayList<String> teamNames,teamId;
     String selectedId;
@@ -47,14 +46,17 @@ public class AddPlayerFragment extends Fragment implements View.OnClickListener,
 
         mDatabase = FirebaseDatabase.getInstance("https://aminandroid-45afc-default-rtdb.europe-west1.firebasedatabase.app/").getReference();
 
-        playerImage = (ImageButton) v.findViewById(R.id.addplayer_image);
-        playerName = (EditText) v.findViewById(R.id.addplayer_name);
-        playerAge = (EditText) v.findViewById(R.id.addplayer_age);
-        playerChampions = (EditText) v.findViewById(R.id.addplayer_champions);
-        playerPoints = (EditText) v.findViewById(R.id.addplayer_points);
-        playerMvps = (EditText) v.findViewById(R.id.addplayer_mvps);
-        playerTeam = (Spinner) v.findViewById(R.id.addplayer_team);
-        addPlayer = (Button) v.findViewById(R.id.addplayer_button);
+        playerImage = v.findViewById(R.id.add_admin_player_image);
+        playerName = v.findViewById(R.id.add_admin_player_name);
+        playerPace = v.findViewById(R.id.add_admin_player_pace);
+        playerShooting = v.findViewById(R.id.add_admin_player_shooting);
+        playerPassing = v.findViewById(R.id.add_admin_player_passing);
+        playerDribbling = v.findViewById(R.id.add_admin_player_drib);
+        playerDefense = v.findViewById(R.id.add_admin_player_def);
+        playerPhysical = v.findViewById(R.id.add_admin_player_phy);
+        playerTeam = v.findViewById(R.id.add_admin_player_team);
+        playerPosition = v.findViewById(R.id.add_admin_player_position);
+        addPlayer = v.findViewById(R.id.add_admin_player_button);
 
         playerImage.setOnClickListener(this);
         addPlayer.setOnClickListener(this);
@@ -95,20 +97,22 @@ public class AddPlayerFragment extends Fragment implements View.OnClickListener,
     }
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.addplayer_button) {
-            Player player = new Player(selectedId,playerName.getText().toString(),Integer.parseInt(playerAge.getText().toString()),Integer.parseInt(playerMvps.getText().toString()),Integer.parseInt(playerChampions.getText().toString()),Integer.parseInt(playerPoints.getText().toString()));
+        if (v.getId() == R.id.add_admin_player_button) {
+            Player player = new Player(selectedId,playerName.getText().toString(),Integer.parseInt(playerPace.getText().toString()),Integer.parseInt(playerShooting.getText().toString()),Integer.parseInt(playerPassing.getText().toString()),Integer.parseInt(playerDribbling.getText().toString()),Integer.parseInt(playerDefense.getText().toString()),Integer.parseInt(playerPhysical.getText().toString()));
             DatabaseReference pushPlayer = mDatabase.child("Players").push();
             player.setPid(pushPlayer.getKey());
             pushPlayer.setValue(player);
             Toast.makeText(getContext(),"Player Added Succesfully",Toast.LENGTH_SHORT).show();
             playerName.setText("");
-            playerAge.setText("");
-            playerMvps.setText("");
-            playerChampions.setText("");
-            playerPoints.setText("");
+            playerPace.setText("");
+            playerShooting.setText("");
+            playerPassing.setText("");
+            playerDribbling.setText("");
+            playerDefense.setText("");
+            playerPhysical.setText("");
 
         }
-        if(v.getId() == R.id.addplayer_image){
+        if(v.getId() == R.id.add_admin_player_image){
             Intent gallery = new Intent(Intent.ACTION_PICK,
                     MediaStore.Images.Media.INTERNAL_CONTENT_URI);
             startActivityForResult(gallery, RESULT_LOAD_IMAGE);
