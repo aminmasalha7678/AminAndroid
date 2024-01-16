@@ -62,7 +62,8 @@ public class ViewPlayersFragment extends Fragment {
                             parseInt(String.valueOf(ds.child("passing").getValue())),
                             parseInt(String.valueOf(ds.child("dribbling").getValue())),
                             parseInt(String.valueOf(ds.child("defense").getValue())),
-                            parseInt(String.valueOf(ds.child("physical").getValue()))));
+                            parseInt(String.valueOf(ds.child("physical").getValue())),
+                            String.valueOf(ds.child("position").getValue())));
                 }
                 adapter.notifyDataSetChanged();
 
