@@ -28,7 +28,7 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.PlayerView
     @Override
     public PlayerViewHolder onCreateViewHolder(ViewGroup parent, int i) {
 
-        View view = LayoutInflater.from(context).inflate(R.layout.listitem, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.player_card, parent, false);
         return new PlayerViewHolder(view);
 
     }
@@ -36,13 +36,24 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.PlayerView
     @Override
     public void onBindViewHolder(@NonNull PlayerViewHolder holder, int position) {
         String name = "Name: " + PlayersInfoList.get(position).getName();
-        String age = "Age: " + PlayersInfoList.get(position).getAge();
-        String points = "Points: " + PlayersInfoList.get(position).getPoints();
+        String pac = "Pace: " + PlayersInfoList.get(position).getName();
+        String sho = "Shooting: " + PlayersInfoList.get(position).getName();
+        String pas = "Passing: " + PlayersInfoList.get(position).getName();
+        String dri = "Dribbling: " + PlayersInfoList.get(position).getName();
+        String def = "Defense: " + PlayersInfoList.get(position).getName();
+        String phy = "Physical: " + PlayersInfoList.get(position).getName();
+        String pos = "Positions: " + PlayersInfoList.get(position).getName();
+
         pid = PlayersInfoList.get(position).getPid();
 
-        holder.PlayerName.setText(name);
-        holder.PlayerAge.setText(age);
-        holder.PlayerPoints.setText(points);
+        holder.playerName.setText(name);
+        holder.playerPac.setText(pac);
+        holder.playerSho.setText(sho);
+        holder.playerPas.setText(pas);
+        holder.playerDri.setText(dri);
+        holder.playerDef.setText(def);
+        holder.playerPhy.setText(phy);
+        holder.playerPos.setText(pos);
         holder.playerId = pid;
     }
 
@@ -52,14 +63,19 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.PlayerView
     }
 
     public class PlayerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView PlayerName, PlayerPoints, PlayerAge;
+        TextView playerName, playerPac,playerSho,playerPas,playerDri,playerDef,playerPhy,playerPos ;
         String playerId;
 
         public PlayerViewHolder(@NonNull View itemView) {
             super(itemView);
-            PlayerName = itemView.findViewById(R.id.list_player_name);
-            PlayerAge = itemView.findViewById(R.id.list_player_age);
-            PlayerPoints = itemView.findViewById(R.id.list_player_points);
+            playerName = itemView.findViewById(R.id.player_card_name);
+            playerPac = itemView.findViewById(R.id.player_card_pac);
+            playerSho = itemView.findViewById(R.id.player_card_sho);
+            playerPas = itemView.findViewById(R.id.player_card_pas);
+            playerDri = itemView.findViewById(R.id.player_card_dri);
+            playerDef = itemView.findViewById(R.id.player_card_def);
+            playerPhy = itemView.findViewById(R.id.player_card_phy);
+            playerPos = itemView.findViewById(R.id.player_card_pos);
             playerId = "";
             itemView.setOnClickListener(this);
         }

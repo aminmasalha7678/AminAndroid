@@ -13,9 +13,10 @@ public class Player {
     private int dribbling;
     private int defense;
     private int physical;
+    private String position;
     private Byte[] player_img;
 
-    public Player(String pid, String tid, String name, int pace, int shooting, int passing, int dribbling, int defense, int physical, Byte[] player_img) {
+    public Player(String pid, String tid, String name, int pace, int shooting, int passing, int dribbling, int defense, int physical,String position, Byte[] player_img) {
         this.pid = pid;
         this.tid = tid;
         this.name = name;
@@ -26,8 +27,9 @@ public class Player {
         this.defense = defense;
         this.physical = physical;
         this.player_img = player_img;
+        this.position = position;
     }
-    public Player(String pid, String tid, String name, int pace, int shooting, int passing, int dribbling, int defense, int physical) {
+    public Player(String pid, String tid, String name, int pace, int shooting, int passing, int dribbling, int defense, int physical,String position) {
         this.pid = pid;
         this.tid = tid;
         this.name = name;
@@ -37,8 +39,9 @@ public class Player {
         this.dribbling = dribbling;
         this.defense = defense;
         this.physical = physical;
+        this.position = position;
     }
-    public Player(String tid, String name, int pace, int shooting, int passing, int dribbling, int defense, int physical) {
+    public Player(String tid, String name, int pace, int shooting, int passing, int dribbling, int defense, int physical,String position) {
         this.tid = tid;
         this.name = name;
         this.pace = pace;
@@ -47,6 +50,7 @@ public class Player {
         this.dribbling = dribbling;
         this.defense = defense;
         this.physical = physical;
+        this.position = position;
     }
 
 
@@ -120,6 +124,14 @@ public class Player {
 
     public void setPhysical(int physical) {
         this.physical = physical;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
     }
 
     public Byte[] getPlayer_img() {

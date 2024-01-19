@@ -25,6 +25,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
@@ -35,7 +36,7 @@ public class AddPlayerFragment extends Fragment implements View.OnClickListener,
     ImageButton playerImage;
     Spinner playerTeam,playerPosition;
     DatabaseReference mDatabase;
-    ArrayList<String> teamNames,teamId;
+    ArrayList<String> teamNames,teamId,positions;
     String selectedId;
 
     @Override
@@ -58,10 +59,20 @@ public class AddPlayerFragment extends Fragment implements View.OnClickListener,
         playerPosition = v.findViewById(R.id.add_admin_player_position);
         addPlayer = v.findViewById(R.id.add_admin_player_button);
 
+
+        positions.add("C");
+        positions.add("PF");
+        positions.add("SF");
+        positions.add("SG");
+        positions.add("PG");
+
+        ArrayAdapter<String> positionAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, positions);
+        positionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        playerPosition.setAdapter(positionAdapter);
+
         playerImage.setOnClickListener(this);
         addPlayer.setOnClickListener(this);
         fillTeamsNameAndId();
-
 
         return v;
     }
@@ -98,7 +109,15 @@ public class AddPlayerFragment extends Fragment implements View.OnClickListener,
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.add_admin_player_button) {
-            Player player = new Player(selectedId,playerName.getText().toString(),Integer.parseInt(playerPace.getText().toString()),Integer.parseInt(playerShooting.getText().toString()),Integer.parseInt(playerPassing.getText().toString()),Integer.parseInt(playerDribbling.getText().toString()),Integer.parseInt(playerDefense.getText().toString()),Integer.parseInt(playerPhysical.getText().toString()));
+            Player player = new Player(selectedId,
+                    playerName.getText().toString(),
+                    Integer.parseInt(playerPace.getText().toString()),
+                    Integer.parseInt(playerShooting.getText().toString()),
+                    Integer.parseInt(playerPassing.getText().toString()),
+                    Integer.parseInt(playerDribbling.getText().toString()),
+                    Integer.parseInt(playerDefense.getText().toString()),
+                    Integer.parseInt(playerPhysical.getText().toString()),
+                    playerPosition.toString());
             DatabaseReference pushPlayer = mDatabase.child("Players").push();
             player.setPid(pushPlayer.getKey());
             pushPlayer.setValue(player);

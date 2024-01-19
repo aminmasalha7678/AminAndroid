@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:textAlignment="center">
 
     <ImageView
         android:id="@+id/imageView"
@@ -13,12 +14,32 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/user_player_card" />
 
+    <ImageView
+        android:id="@+id/player_card_team"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="264dp"
+        android:layout_marginTop="296dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/aklogo" />
+
+    <ImageView
+        android:id="@+id/player_card_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="100dp"
+        android:layout_marginTop="240dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
     <TextView
         android:id="@+id/player_card_dri"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="448dp"
         android:layout_marginEnd="140dp"
+        android:layout_marginTop="448dp"
         android:text="99"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -29,8 +50,8 @@
         android:id="@+id/player_card_pac"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="448dp"
         android:layout_marginEnd="292dp"
+        android:layout_marginTop="448dp"
         android:text="99"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -41,8 +62,8 @@
         android:id="@+id/player_card_sho"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="484dp"
         android:layout_marginEnd="292dp"
+        android:layout_marginTop="484dp"
         android:text="99"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -53,8 +74,8 @@
         android:id="@+id/player_card_def"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="484dp"
         android:layout_marginEnd="140dp"
+        android:layout_marginTop="484dp"
         android:text="99"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -65,8 +86,8 @@
         android:id="@+id/player_card_phy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="520dp"
         android:layout_marginEnd="140dp"
+        android:layout_marginTop="520dp"
         android:text="99"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -77,8 +98,8 @@
         android:id="@+id/player_card_pas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="520dp"
         android:layout_marginEnd="292dp"
+        android:layout_marginTop="520dp"
         android:text="99"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -89,32 +110,22 @@
         android:id="@+id/player_card_pos"
         android:layout_width="68dp"
         android:layout_height="40dp"
-        android:layout_marginTop="236dp"
-        android:layout_marginEnd="248dp"
+        android:layout_marginEnd="250dp"
+        android:layout_marginTop="240dp"
         android:text="CF"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/player_card_team"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="296dp"
-        android:layout_marginEnd="264dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/aklogo"/>
-
-    <ImageView
-        android:id="@+id/player_card_image"
-        android:layout_width="140dp"
-        android:layout_height="166dp"
         android:layout_marginTop="212dp"
-        android:layout_marginEnd="88dp"
+    <TextView
+        android:id="@+id/player_card_name"
+        android:layout_width="212dp"
+        android:layout_height="33dp"
+        android:layout_marginEnd="100dp"
+        android:text="Name"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:layout_constraintTop_toTopOf="@+id/imageView" />
 
     <TextView
         android:id="@+id/textView"
