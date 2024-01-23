@@ -34,10 +34,10 @@ public class AddTeamFragment extends Fragment implements View.OnClickListener {
 
         View v = inflater.inflate(R.layout.fragment_add_team, container, false);
 
-        teamName = (EditText) v.findViewById(R.id.addteam_name);
-        teamYear = (EditText) v.findViewById(R.id.addteam_year);
-        teamChampion = (EditText) v.findViewById(R.id.addteam_championships);
-        addTeam = (Button) v.findViewById(R.id.addteam_button);
+        teamName = v.findViewById(R.id.addteam_name);
+        teamYear = v.findViewById(R.id.addteam_year);
+        teamChampion = v.findViewById(R.id.addteam_championships);
+        addTeam = v.findViewById(R.id.addteam_button);
         mDatabase = FirebaseDatabase.getInstance("https://aminandroid-45afc-default-rtdb.europe-west1.firebasedatabase.app/").getReference();
 
         addTeam.setOnClickListener(this);

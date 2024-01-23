@@ -8,7 +8,7 @@
 
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/admin_cardView_player"
+        android:id="@+id/cardview_player"
         android:layout_width="match_parent"
         android:layout_height="233dp"
         android:layout_marginEnd="1dp"
@@ -22,11 +22,11 @@
             android:padding="4dp">
 
             <Button
-                android:id="@+id/adminHome_viewPlayers"
-                android:layout_width="wrap_content"
+                android:id="@+id/game_one_vs_one"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="136dp"
-                android:text="View Players"
+                android:layout_marginEnd="144dp"
+                android:text="1 VS 1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/adminHome_players" />
 
@@ -57,12 +57,13 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardview_team"
         android:layout_width="match_parent"
         android:layout_height="233dp"
         android:layout_marginEnd="1dp"
         android:layout_marginTop="77dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/admin_cardView_player">
+        app:layout_constraintTop_toBottomOf="@+id/cardview_player">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -70,11 +71,11 @@
             android:padding="4dp">
 
             <Button
-                android:id="@+id/adminHome_viewTeams"
+                android:id="@+id/game_team_battle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="136dp"
-                android:text="View Teams"
+                android:layout_marginEnd="140dp"
+                android:text="Team Battle!"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/adminHome_teams" />
 
@@ -84,7 +85,7 @@
                 android:layout_height="109dp"
                 android:layout_marginTop="36dp"
                 android:gravity="center"
-                android:text=" "
+                android:text="Make your favorite teams face off in a team battle and see who is the best"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -92,8 +93,8 @@
             <TextView
                 android:layout_width="395dp"
                 android:layout_height="53dp"
-                android:layout_marginTop="4dp"
                 android:layout_marginEnd="4dp"
+                android:layout_marginTop="4dp"
                 android:gravity="center_horizontal"
                 android:text="Team VS Team"
                 android:textSize="34sp"

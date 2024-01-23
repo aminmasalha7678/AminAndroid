@@ -21,8 +21,8 @@ Button viewPlayers,viewTeams;
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_admin_home, container, false);
 
-        viewPlayers = (Button) v.findViewById(R.id.adminHome_viewPlayers);
-        viewTeams = (Button) v.findViewById(R.id.adminHome_viewTeams);
+        viewPlayers = v.findViewById(R.id.adminHome_viewPlayers);
+        viewTeams = v.findViewById(R.id.adminHome_viewTeams);
 
         viewPlayers.setOnClickListener(this);
         viewTeams.setOnClickListener(this);
