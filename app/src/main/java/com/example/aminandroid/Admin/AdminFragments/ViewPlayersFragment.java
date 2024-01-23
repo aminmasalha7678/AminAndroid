@@ -48,8 +48,7 @@ public class ViewPlayersFragment extends Fragment {
         return v;
     }
 
-    public List<Player> fillPlayerInfo() {
-        List<Player> p = new ArrayList<Player>();
+    public void fillPlayerInfo() {
         mDatabase.child("Players").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -75,6 +74,5 @@ public class ViewPlayersFragment extends Fragment {
 
             }
         });
-        return p;
     }
 }

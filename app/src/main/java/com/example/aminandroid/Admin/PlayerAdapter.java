@@ -27,7 +27,6 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.PlayerView
     }
     @Override
     public PlayerViewHolder onCreateViewHolder(ViewGroup parent, int i) {
-
         View view = LayoutInflater.from(context).inflate(R.layout.player_card, parent, false);
         return new PlayerViewHolder(view);
 
@@ -35,14 +34,15 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.PlayerView
 
     @Override
     public void onBindViewHolder(@NonNull PlayerViewHolder holder, int position) {
-        String name = "Name: " + PlayersInfoList.get(position).getName();
-        String pac = "Pace: " + PlayersInfoList.get(position).getName();
-        String sho = "Shooting: " + PlayersInfoList.get(position).getName();
-        String pas = "Passing: " + PlayersInfoList.get(position).getName();
-        String dri = "Dribbling: " + PlayersInfoList.get(position).getName();
-        String def = "Defense: " + PlayersInfoList.get(position).getName();
-        String phy = "Physical: " + PlayersInfoList.get(position).getName();
-        String pos = "Positions: " + PlayersInfoList.get(position).getName();
+        String name = PlayersInfoList.get(position).getName();
+        String pac = String.valueOf(PlayersInfoList.get(position).getPace());
+        String sho = String.valueOf(PlayersInfoList.get(position).getShooting());
+        String pas = String.valueOf(PlayersInfoList.get(position).getPassing());
+        String dri = String.valueOf(PlayersInfoList.get(position).getDribbling());
+        String def = String.valueOf(PlayersInfoList.get(position).getDefense());
+        String phy = String.valueOf(PlayersInfoList.get(position).getPhysical());
+        String overall = String.valueOf(PlayersInfoList.get(position).getOverall());
+        String pos = PlayersInfoList.get(position).getPosition();
 
         pid = PlayersInfoList.get(position).getPid();
 
@@ -54,6 +54,7 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.PlayerView
         holder.playerDef.setText(def);
         holder.playerPhy.setText(phy);
         holder.playerPos.setText(pos);
+        holder.playerOverall.setText(overall);
         holder.playerId = pid;
     }
 
@@ -63,11 +64,12 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.PlayerView
     }
 
     public class PlayerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView playerName, playerPac,playerSho,playerPas,playerDri,playerDef,playerPhy,playerPos ;
+        TextView playerName, playerPac,playerSho,playerPas,playerDri,playerDef,playerPhy,playerPos,playerOverall;
         String playerId;
 
         public PlayerViewHolder(@NonNull View itemView) {
             super(itemView);
+            
             playerName = itemView.findViewById(R.id.player_card_name);
             playerPac = itemView.findViewById(R.id.player_card_pac);
             playerSho = itemView.findViewById(R.id.player_card_sho);
@@ -76,8 +78,10 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.PlayerView
             playerDef = itemView.findViewById(R.id.player_card_def);
             playerPhy = itemView.findViewById(R.id.player_card_phy);
             playerPos = itemView.findViewById(R.id.player_card_pos);
+            playerOverall = itemView.findViewById(R.id.player_card_overall);
             playerId = "";
-            itemView.setOnClickListener(this);
+            if(itemView.getContext() instanceof AdminActivity)
+                itemView.setOnClickListener(this);
         }
 
         @Override

@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,25 +30,29 @@ public class UpdateActivity extends AppCompatActivity implements View.OnClickLis
     String id,info,selectedId;
     ImageButton updateImage;
     EditText name;
-    EditText playerAge,playerMvp,playerChampions,playerPoints;
+    EditText playerPace,playerShooting,playerPassing,playerDribbling,playerDefense,playerPhysical;
     EditText teamChampions,teamYear;
-    Spinner playerTeam;
+    Spinner playerTeam,playerPosition;
     Button update,delete,goBack;
     DatabaseReference mDatabase;
-    ArrayList<String> teamNames,teamId;
+    ArrayList<String> teamNames,teamId,positions;
+    String position;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update);
         id = getIntent().getStringExtra("id");
         info = getIntent().getStringExtra("info");
+        playerPace = findViewById(R.id.update_player_pac);
+        playerShooting = findViewById(R.id.update_player_sho);
+        playerPassing = findViewById(R.id.update_player_pas);
+        playerDribbling = findViewById(R.id.update_player_dri);
+        playerDefense = findViewById(R.id.update_player_def);
+        playerPhysical = findViewById(R.id.update_player_phy);
         updateImage = findViewById(R.id.update_image);
         name = findViewById(R.id.update_name);
-        playerAge = findViewById(R.id.update_player_age);
-        playerMvp = findViewById(R.id.update_player_mvps);
-        playerChampions = findViewById(R.id.update_player_champions);
-        playerPoints = findViewById(R.id.update_player_points);
         playerTeam = findViewById(R.id.update_player_team);
+        playerPosition = findViewById(R.id.update_player_position);
         teamChampions = findViewById(R.id.update_team_champions);
         teamYear = findViewById(R.id.update_team_year);
         update = findViewById(R.id.update_button);
@@ -57,16 +60,34 @@ public class UpdateActivity extends AppCompatActivity implements View.OnClickLis
         goBack = findViewById(R.id.goback_button);
         mDatabase = FirebaseDatabase.getInstance("https://aminandroid-45afc-default-rtdb.europe-west1.firebasedatabase.app/").getReference();
 
+        positions = new ArrayList<String>();
+
+        positions.add("C");
+        positions.add("PF");
+        positions.add("SF");
+        positions.add("SG");
+        positions.add("PG");
+
+        ArrayAdapter<String> positionAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, positions);
+        positionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        playerPosition.setAdapter(positionAdapter);
+
+        playerPosition.setOnItemSelectedListener(this);
+
         if(info.equals("Team")){
             teamChampions.setVisibility(View.VISIBLE);
             teamYear.setVisibility(View.VISIBLE);
         }
         else if(info.equals("Player")){
-            playerAge.setVisibility(View.VISIBLE);
-            playerMvp.setVisibility(View.VISIBLE);
-            playerChampions.setVisibility(View.VISIBLE);
-            playerPoints.setVisibility(View.VISIBLE);
+            playerPosition.setVisibility(View.VISIBLE);
             playerTeam.setVisibility(View.VISIBLE);
+            playerPace.setVisibility(View.VISIBLE);
+            playerShooting.setVisibility(View.VISIBLE);
+            playerDribbling.setVisibility(View.VISIBLE);
+            playerDefense.setVisibility(View.VISIBLE);
+            playerPhysical.setVisibility(View.VISIBLE);
+            playerPassing.setVisibility(View.VISIBLE);
+
         }
         update.setOnClickListener(this);
         delete.setOnClickListener(this);
@@ -87,7 +108,7 @@ public class UpdateActivity extends AppCompatActivity implements View.OnClickLis
             }
         }
         else if (v.getId() == R.id.update_button) {
-            if (info.equals("Team")){
+           if (info.equals("Team")){
                 mDatabase.child("Teams").child(id).setValue(new Team(id,
                         name.getText().toString(),
                         parseInt(teamChampions.getText().toString()),
@@ -95,13 +116,15 @@ public class UpdateActivity extends AppCompatActivity implements View.OnClickLis
             }
             else{
                 mDatabase.child("Players").child(id).setValue(new Player(id,
+                        selectedId,
                         name.getText().toString(),
-                        Integer.parseInt(playerAge.getText().toString()),
-                        Integer.parseInt(playerMvp.getText().toString()),
-                        Integer.parseInt(playerChampions.getText().toString()),
-                        Integer.parseInt(playerAge.getText().toString()),
-                        Integer.parseInt(playerAge.getText().toString()),
-                        Integer.parseInt(playerPoints.getText().toString())));
+                        parseInt(playerPace.getText().toString()),
+                        parseInt(playerShooting.getText().toString()),
+                        parseInt(playerPassing.getText().toString()),
+                        parseInt(playerDribbling.getText().toString()),
+                        parseInt(playerDefense.getText().toString()),
+                        parseInt(playerPhysical.getText().toString()),
+                        name.getText().toString()));
             }
         }
         startActivity(i);
@@ -140,7 +163,12 @@ public class UpdateActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int i, long id) {
-        selectedId = teamId.get(i);
+        if(view != null) {
+            if (parent.getId() == R.id.add_admin_player_team)
+                selectedId = teamId.get(i);
+            else
+                position = positions.get(i);
+        }
     }
 
     @Override

@@ -7,6 +7,7 @@ public class Player {
     private String pid; // Player Id
     private String tid; // Team Id
     private String name;
+    private int overall;
     private int pace;
     private int shooting;
     private int passing;
@@ -28,6 +29,7 @@ public class Player {
         this.physical = physical;
         this.player_img = player_img;
         this.position = position;
+        this.overall = (this.shooting+this.pace+this.passing+this.dribbling+this.defense+this.physical)/6;
     }
     public Player(String pid, String tid, String name, int pace, int shooting, int passing, int dribbling, int defense, int physical,String position) {
         this.pid = pid;
@@ -40,6 +42,7 @@ public class Player {
         this.defense = defense;
         this.physical = physical;
         this.position = position;
+        this.overall = (this.shooting+this.pace+this.passing+this.dribbling+this.defense+this.physical)/6;
     }
     public Player(String tid, String name, int pace, int shooting, int passing, int dribbling, int defense, int physical,String position) {
         this.tid = tid;
@@ -51,8 +54,11 @@ public class Player {
         this.defense = defense;
         this.physical = physical;
         this.position = position;
+        this.overall = (this.shooting+this.pace+this.passing+this.dribbling+this.defense+this.physical)/6;
     }
 
+
+    public int getOverall(){ return (this.shooting+this.pace+this.passing+this.dribbling+this.defense+this.physical)/6; }
 
     public String getPid() {
         return pid;

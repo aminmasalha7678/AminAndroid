@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/add_admin_player_button"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -12,24 +11,14 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/admin_player_card" />
-
-    <Button
-        android:id="@+id/add_admin_player"
-        android:layout_width="262dp"
-        android:layout_height="56dp"
-        android:layout_marginEnd="72dp"
-        android:layout_marginTop="632dp"
-        android:text="add player"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:srcCompat="@drawable/user_player_card" />
 
     <EditText
         android:id="@+id/add_admin_player_pace"
         android:layout_width="62dp"
         android:layout_height="48dp"
-        android:layout_marginEnd="278dp"
-        android:layout_marginTop="435dp"
+        android:layout_marginTop="430dp"
+        android:layout_marginEnd="284dp"
         android:ems="10"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="@+id/imageView"
@@ -39,8 +28,8 @@
         android:id="@+id/add_admin_player_shooting"
         android:layout_width="62dp"
         android:layout_height="48dp"
-        android:layout_marginEnd="278dp"
-        android:layout_marginTop="470dp"
+        android:layout_marginTop="465dp"
+        android:layout_marginEnd="284dp"
         android:ems="10"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,8 +39,8 @@
         android:id="@+id/add_admin_player_passing"
         android:layout_width="62dp"
         android:layout_height="48dp"
-        android:layout_marginEnd="278dp"
-        android:layout_marginTop="505dp"
+        android:layout_marginTop="500dp"
+        android:layout_marginEnd="284dp"
         android:ems="10"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
@@ -61,8 +50,8 @@
         android:id="@+id/add_admin_player_drib"
         android:layout_width="62dp"
         android:layout_height="48dp"
-        android:layout_marginEnd="135dp"
-        android:layout_marginTop="435dp"
+        android:layout_marginTop="430dp"
+        android:layout_marginEnd="140dp"
         android:ems="10"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
@@ -72,8 +61,8 @@
         android:id="@+id/add_admin_player_def"
         android:layout_width="62dp"
         android:layout_height="48dp"
-        android:layout_marginEnd="135dp"
-        android:layout_marginTop="470dp"
+        android:layout_marginTop="465dp"
+        android:layout_marginEnd="140dp"
         android:ems="10"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="@+id/imageView"
@@ -83,10 +72,38 @@
         android:id="@+id/add_admin_player_phy"
         android:layout_width="62dp"
         android:layout_height="48dp"
-        android:layout_marginEnd="135dp"
-        android:layout_marginTop="505dp"
+        android:layout_marginTop="500dp"
+        android:layout_marginEnd="140dp"
         android:ems="10"
         android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/add_admin_player_position"
+        android:layout_width="115dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="240dp"
+        android:layout_marginEnd="236dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/add_admin_player_team"
+        android:layout_width="115dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="300dp"
+        android:layout_marginEnd="236dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/add_admin_player_button"
+        android:layout_width="262dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="632dp"
+        android:layout_marginEnd="72dp"
+        android:text="add player"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -94,12 +111,11 @@
         android:id="@+id/add_admin_player_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="100dp"
         android:layout_marginTop="384dp"
+        android:layout_marginEnd="100dp"
         android:ems="10"
         android:hint="Name"
         android:inputType="text"
-        android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView" />
 
@@ -107,29 +123,10 @@
         android:id="@+id/add_admin_player_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="204dp"
         android:layout_marginEnd="72dp"
-        android:layout_marginTop="220dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@tools:sample/avatars" />
-
-
-    <Spinner
-        android:id="@+id/add_admin_player_position"
-        android:layout_width="105dp"
-        android:layout_height="49dp"
-        android:layout_marginEnd="236dp"
-        android:layout_marginTop="240dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Spinner
-        android:id="@+id/add_admin_player_team"
-        android:layout_width="105dp"
-        android:layout_height="49dp"
-        android:layout_marginEnd="236dp"
-        android:layout_marginTop="300dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,22 +16,7 @@
             android:name=".Admin.UpdateActivity"
             android:exported="false" />
         <activity
-            android:name=".Admin.ShowGame"
-            android:exported="false" />
-        <activity
-            android:name=".Admin.ListView"
-            android:exported="false" />
-        <activity
             android:name=".Admin.AdminActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Admin.AddTeamActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Admin.AddPlayerActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Admin.AddGameActivity"
             android:exported="false" />
         <activity
             android:name=".SignupActivity"

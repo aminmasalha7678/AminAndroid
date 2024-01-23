@@ -25,7 +25,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
@@ -38,12 +37,13 @@ public class AddPlayerFragment extends Fragment implements View.OnClickListener,
     DatabaseReference mDatabase;
     ArrayList<String> teamNames,teamId,positions;
     String selectedId;
+    String position;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_add_player, container, false);
+        View v = inflater.inflate(R.layout.fragment_admin_add_player, container, false);
 
         mDatabase = FirebaseDatabase.getInstance("https://aminandroid-45afc-default-rtdb.europe-west1.firebasedatabase.app/").getReference();
 
@@ -59,6 +59,7 @@ public class AddPlayerFragment extends Fragment implements View.OnClickListener,
         playerPosition = v.findViewById(R.id.add_admin_player_position);
         addPlayer = v.findViewById(R.id.add_admin_player_button);
 
+        positions = new ArrayList<String>();
 
         positions.add("C");
         positions.add("PF");
@@ -69,6 +70,8 @@ public class AddPlayerFragment extends Fragment implements View.OnClickListener,
         ArrayAdapter<String> positionAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, positions);
         positionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         playerPosition.setAdapter(positionAdapter);
+
+        playerPosition.setOnItemSelectedListener(this);
 
         playerImage.setOnClickListener(this);
         addPlayer.setOnClickListener(this);
@@ -89,8 +92,10 @@ public class AddPlayerFragment extends Fragment implements View.OnClickListener,
                     teamNames.add(name);
                     teamId.add(id);
                 }
+
                 ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, teamNames);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                if(adapter != null)
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 playerTeam.setAdapter(adapter);
 
                 // Notify the adapter that the data set has changed
@@ -117,7 +122,8 @@ public class AddPlayerFragment extends Fragment implements View.OnClickListener,
                     Integer.parseInt(playerDribbling.getText().toString()),
                     Integer.parseInt(playerDefense.getText().toString()),
                     Integer.parseInt(playerPhysical.getText().toString()),
-                    playerPosition.toString());
+                    position);
+
             DatabaseReference pushPlayer = mDatabase.child("Players").push();
             player.setPid(pushPlayer.getKey());
             pushPlayer.setValue(player);
@@ -140,7 +146,12 @@ public class AddPlayerFragment extends Fragment implements View.OnClickListener,
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        selectedId = teamId.get(i);
+        if(view != null) {
+            if (adapterView.getId() == R.id.add_admin_player_team)
+                selectedId = teamId.get(i);
+            else
+                position = positions.get(i);
+        }
     }
 
     @Override
