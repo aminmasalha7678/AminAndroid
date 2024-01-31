@@ -29,7 +29,6 @@ import java.util.List;
 public class PlayerFragment extends Fragment {
 
     DatabaseReference mDatabase;
-    Button make_player;
     List<Player> players;
     RecyclerView recyclerView;
     PlayerAdapter adapter;

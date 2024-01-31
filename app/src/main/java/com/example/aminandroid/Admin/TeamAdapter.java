@@ -52,7 +52,7 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.TeamViewHolder
     }
 
     public class TeamViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView TeamName, TeamChampionships,TeamEstablishment;
+        TextView TeamName,TeamChampionships,TeamEstablishment;
         String TeamId;
 
         public TeamViewHolder(@NonNull View itemView) {
@@ -61,7 +61,8 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.TeamViewHolder
             TeamChampionships = itemView.findViewById(R.id.list_player_age);
             TeamEstablishment = itemView.findViewById(R.id.list_player_points);
             TeamId = "";
-            itemView.setOnClickListener(this);
+            if(itemView.getContext() instanceof AdminActivity)
+                itemView.setOnClickListener(this);
         }
 
         @Override
