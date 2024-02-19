@@ -130,6 +130,11 @@ public class PickPlayerOrTeamActivity extends AppCompatActivity implements View.
                 });
 
             }
+            else {
+                Toast.makeText(PickPlayerOrTeamActivity.this, "Click on the player you want to choose", Toast.LENGTH_SHORT).show();
+            }
+
+
         }
     }
 

@@ -10,9 +10,9 @@
         android:id="@+id/pick_goback"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="608dp"
-        android:layout_marginEnd="152dp"
-        android:text="Go Back"
+        android:layout_marginTop="644dp"
+        android:layout_marginEnd="148dp"
+        android:text="Go Back!!!"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -20,7 +20,7 @@
         android:id="@+id/pick_choose_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="544dp"
+        android:layout_marginTop="540dp"
         android:layout_marginEnd="136dp"
         android:text="Choose Player"
         app:layout_constraintEnd_toEndOf="parent"
@@ -56,4 +56,14 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pick_list" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="596dp"
+        android:layout_marginEnd="118dp"
+        android:text="Confirm your choice"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
