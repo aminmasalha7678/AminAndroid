@@ -5,12 +5,17 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.aminandroid.Classes.Player;
+import com.example.aminandroid.PickPlayerOrTeamActivity;
 import com.example.aminandroid.R;
 
 import java.util.List;
@@ -64,12 +69,15 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.PlayerView
     }
 
     public class PlayerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView playerName, playerPac,playerSho,playerPas,playerDri,playerDef,playerPhy,playerPos,playerOverall;
+        ConstraintLayout constraintLayout;
+        ImageView card;
+        TextView playerName,playerPac,playerSho,playerPas,playerDri,playerDef,playerPhy,playerPos,playerOverall;
         String playerId;
 
         public PlayerViewHolder(@NonNull View itemView) {
             super(itemView);
-            
+            constraintLayout = itemView.findViewById(R.id.card_layout);
+            card = itemView.findViewById(R.id.card);
             playerName = itemView.findViewById(R.id.player_card_name);
             playerPac = itemView.findViewById(R.id.player_card_pac);
             playerSho = itemView.findViewById(R.id.player_card_sho);
@@ -80,16 +88,33 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.PlayerView
             playerPos = itemView.findViewById(R.id.player_card_pos);
             playerOverall = itemView.findViewById(R.id.player_card_overall);
             playerId = "";
-            if(itemView.getContext() instanceof AdminActivity)
-                itemView.setOnClickListener(this);
+
+
+            itemView.setOnClickListener(this);
+
+            if(itemView.getContext() instanceof PickPlayerOrTeamActivity) {
+                ConstraintSet constraintSet = new ConstraintSet();
+                constraintSet.clone(constraintLayout);
+                constraintSet.connect(card.getId(), ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 340);
+                constraintSet.applyTo(constraintLayout);
+            }
+
         }
 
         @Override
         public void onClick(View v) {
-            Intent i = new Intent(v.getContext(), UpdateActivity.class);
-            i.putExtra("id",playerId);
-            i.putExtra("info","Player");
-            v.getContext().startActivity(i);
+            if(itemView.getContext() instanceof AdminActivity) {
+                Intent i = new Intent(v.getContext(), UpdateActivity.class);
+                i.putExtra("id", playerId);
+                i.putExtra("info", "Player");
+                v.getContext().startActivity(i);
+            }
+            else if(itemView.getContext() instanceof PickPlayerOrTeamActivity){
+                Intent intent = new Intent("message_subject_intent");
+                intent.putExtra("player" ,playerId);
+                LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+            }
+
         }
     }
 }

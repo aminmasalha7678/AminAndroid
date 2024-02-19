@@ -9,4 +9,6 @@
         <color name="white">#FFFFFFFF</color>
         <color name="lavender">#e07502</color>
         <color name="underline">#FFFFFFFF</color>
+        <color name="darkPrimaryColor">#212121</color>
+        <color name="darkPrimaryDarkColor">#000000</color>
 </resources>

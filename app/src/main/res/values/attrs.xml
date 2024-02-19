@@ -1,0 +1,5 @@
+
+<resources>
+    <attr name="listItemBackground" format="reference" />
+    <attr name="lineListItemBackground" format="reference" />
+</resources>

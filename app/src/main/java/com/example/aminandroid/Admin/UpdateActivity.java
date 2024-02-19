@@ -87,12 +87,13 @@ public class UpdateActivity extends AppCompatActivity implements View.OnClickLis
             playerDefense.setVisibility(View.VISIBLE);
             playerPhysical.setVisibility(View.VISIBLE);
             playerPassing.setVisibility(View.VISIBLE);
+            fillTeamsNameAndId();
 
         }
         update.setOnClickListener(this);
         delete.setOnClickListener(this);
         goBack.setOnClickListener(this);
-        fillTeamsNameAndId();
+
     }
 
 
