@@ -40,7 +40,7 @@ public class PickPlayerOrTeamActivity extends AppCompatActivity implements View.
     PlayerAdapter playerAdapter;
     Button choose,goBack,confirm;
     TextView pick1,pick2;
-    String player,team,playerName,pick1_id,pick2_id;
+    String player,team,playerName,pick1_id,pick2_id,info;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,13 +56,14 @@ public class PickPlayerOrTeamActivity extends AppCompatActivity implements View.
         pick2 = findViewById(R.id.pick_2);
 
 
-        String info = getIntent().getStringExtra("info");
+        info = getIntent().getStringExtra("info");
         if(info.equals("player")){
             players = new ArrayList<>();
             playerAdapter = new PlayerAdapter(this, players);
             recyclerView.setAdapter(playerAdapter);
             choose.setOnClickListener(this);
             goBack.setOnClickListener(this);
+            confirm.setOnClickListener(this);
             fillPlayerInfo();
 
             BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
@@ -173,12 +174,17 @@ public class PickPlayerOrTeamActivity extends AppCompatActivity implements View.
 
 
         }
-        else if(v.getId() == confirm.getId()){
+        else if(v.getId() == R.id.pick_confirm){
+
             if(!pick2.getText().toString().equals("Player 2") && !pick2.getText().toString().equals("Team 2")){
                Intent i = new Intent(PickPlayerOrTeamActivity.this,ConclusionActivity.class);
                i.putExtra("pick1",pick1_id);
                i.putExtra("pick2",pick2_id);
+               i.putExtra("info",info);
                startActivity(i);
+            }
+            else{
+                Toast.makeText(PickPlayerOrTeamActivity.this, "Click on the players you want to choose", Toast.LENGTH_SHORT).show();
             }
         }
     }

@@ -163,4 +163,27 @@ public class Player {
                 ", player_img=" + Arrays.toString(player_img) +
                 '}';
     }
+
+
+    public int[] startGame(Player p2){
+        int[] scores = new int[2];
+        int pick1_score = 0;
+        int pick2_score = 0;
+        int pick1_random,pick2_random;
+        while(pick2_score != 7 && pick1_score != 7){
+            pick1_random = (int) (Math.random()*this.getOverall());
+            pick2_random = (int) (Math.random()*p2.getOverall());
+            if(pick1_random > pick2_random){
+                pick1_score++;
+            }
+            else if(pick2_random > pick1_random) {
+                pick2_score++;
+            }
+
+        }
+        scores[0] = pick1_score;
+        scores[1] = pick2_score;
+
+        return scores;
+    }
 }

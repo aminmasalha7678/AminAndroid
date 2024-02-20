@@ -8,23 +8,23 @@
 
     <ImageView
         android:id="@+id/conc_pick1_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="41dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        tools:srcCompat="@drawable/avatar" />
 
     <ImageView
         android:id="@+id/conc_pick2_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="30dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:layout_marginTop="41dp"
+        android:layout_marginEnd="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        tools:srcCompat="@drawable/avatar" />
 
     <TextView
         android:id="@+id/textView2"
@@ -60,11 +60,11 @@
         app:layout_constraintTop_toBottomOf="@+id/conc_pick2_image" />
 
     <Button
-        android:id="@+id/conc_summary"
+        android:id="@+id/conc_goback"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="60dp"
-        android:layout_marginEnd="152dp"
+        android:layout_marginEnd="148dp"
+        android:layout_marginBottom="16dp"
         android:text="Go Back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -118,18 +118,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="161dp"
         android:text="Highlights"
         android:textSize="20sp"
-        app:layout_constraintTop_toBottomOf="@+id/textView7"
-        tools:layout_editor_absoluteX="160dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/conc_highlights"
         android:layout_width="378dp"
         android:layout_height="191dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="22dp"
         android:gravity="center"
         android:text="&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&quot;"
         android:textSize="16sp"
-        tools:layout_editor_absoluteX="11dp"
-        tools:layout_editor_absoluteY="429dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
 </androidx.constraintlayout.widget.ConstraintLayout>
