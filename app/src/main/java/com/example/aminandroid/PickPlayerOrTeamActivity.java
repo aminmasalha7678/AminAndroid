@@ -19,7 +19,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.aminandroid.Admin.PlayerAdapter;
+import com.example.aminandroid.Admin.TeamAdapter;
 import com.example.aminandroid.Classes.Player;
+import com.example.aminandroid.Classes.Team;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,9 +34,11 @@ import java.util.List;
 public class PickPlayerOrTeamActivity extends AppCompatActivity implements View.OnClickListener {
     DatabaseReference mDatabase;
     List<Player> players;
+    List<Team> teams;
     RecyclerView recyclerView;
+    TeamAdapter teamsAdapter;
     PlayerAdapter playerAdapter;
-    Button choose,goBack;
+    Button choose,goBack,confirm;
     TextView pick1,pick2;
     String player,team,playerName,pick1_id,pick2_id;
     @Override
@@ -46,6 +50,7 @@ public class PickPlayerOrTeamActivity extends AppCompatActivity implements View.
         recyclerView = findViewById(R.id.pick_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         choose = findViewById(R.id.pick_choose_button);
+        confirm = findViewById(R.id.pick_confirm);
         goBack = findViewById(R.id.pick_goback);
         pick1 = findViewById(R.id.pick_1);
         pick2 = findViewById(R.id.pick_2);
@@ -69,6 +74,15 @@ public class PickPlayerOrTeamActivity extends AppCompatActivity implements View.
             LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,new IntentFilter("message_subject_intent"));
 
         }
+        else if(info.equals("team")){
+            pick1.setText("Team 1");
+            pick2.setText("Team 2");
+            choose.setText("Choose Team");
+            teams = new ArrayList<>();
+            teamsAdapter = new TeamAdapter(this, teams);
+            recyclerView.setAdapter(teamsAdapter);
+            fillTeamInfo();
+        }
     }
     public void fillPlayerInfo() {
         mDatabase.child("Players").addValueEventListener(new ValueEventListener() {
@@ -87,6 +101,29 @@ public class PickPlayerOrTeamActivity extends AppCompatActivity implements View.
                             String.valueOf(ds.child("position").getValue())));
                 }
                 playerAdapter.notifyDataSetChanged();
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+
+    private void fillTeamInfo() {
+
+        mDatabase.child("Teams").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    teams.add(new Team(String.valueOf(ds.child("name").getValue()),
+                            parseInt(String.valueOf(ds.child("championships").getValue())),
+                            parseInt(String.valueOf(ds.child("establishment").getValue()))));
+                }
+                teamsAdapter.notifyDataSetChanged();
 
 
             }
@@ -135,6 +172,14 @@ public class PickPlayerOrTeamActivity extends AppCompatActivity implements View.
             }
 
 
+        }
+        else if(v.getId() == confirm.getId()){
+            if(!pick2.getText().toString().equals("Player 2") && !pick2.getText().toString().equals("Team 2")){
+               Intent i = new Intent(PickPlayerOrTeamActivity.this,ConclusionActivity.class);
+               i.putExtra("pick1",pick1_id);
+               i.putExtra("pick2",pick2_id);
+               startActivity(i);
+            }
         }
     }
 
