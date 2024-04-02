@@ -35,10 +35,14 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.TeamViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull TeamViewHolder holder, int position) {
+
+
         String name = "Name: " + TeamInfoList.get(position).getName();
         String establishment = "Establishment: " + TeamInfoList.get(position).getEstablishment();
         String championships = "Championships: " + TeamInfoList.get(position).getChampionships();
         tid = TeamInfoList.get(position).getTid();
+
+
 
         holder.TeamName.setText(name);
         holder.TeamChampionships.setText(establishment);
