@@ -59,14 +59,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/playertwo_image" />
 
-    <Button
-        android:id="@+id/start_1v1_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="132dp"
-        android:text="Start The 1v1!!!"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/choose_players_button" />
 </androidx.constraintlayout.widget.ConstraintLayout>
