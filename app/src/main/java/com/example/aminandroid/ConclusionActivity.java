@@ -147,7 +147,9 @@ public class ConclusionActivity extends AppCompatActivity implements View.OnClic
                             pick2_name.setText(t2.getName());
                         }
                     }
-                    scores = t1.startGame(t2);
+
+                    t1.startGame(t2);
+
                     pick1_score.setText(String.valueOf(scores[0]));
                     pick2_score.setText(String.valueOf(scores[1]));
                     if(scores[0]>scores[1]){
@@ -157,7 +159,6 @@ public class ConclusionActivity extends AppCompatActivity implements View.OnClic
                         winner = t2.getName();
                     }
 
-                    sendRequest("h");
                 }
 
                 @Override
