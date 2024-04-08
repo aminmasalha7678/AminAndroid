@@ -16,7 +16,7 @@ import com.example.aminandroid.R;
 
 public class PlayerBattleFragment extends Fragment implements View.OnClickListener {
 
-    Button choosePlayers,startBattle;
+    Button choosePlayers;
     ImageView player1Image,player2Image;
     TextView player1Text,player2Text;
     @Override
@@ -24,16 +24,11 @@ public class PlayerBattleFragment extends Fragment implements View.OnClickListen
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_player_battle, container, false);
         choosePlayers = v.findViewById(R.id.choose_players_button);
-        startBattle = v.findViewById(R.id.start_1v1_button);
         player1Image = v.findViewById(R.id.playerone_image);
         player1Text = v.findViewById(R.id.playerone_name);
         player2Image = v.findViewById(R.id.playertwo_image);
         player2Text = v.findViewById(R.id.playertwo_name);
 
-        if(getActivity().getIntent().getStringExtra("player1") != null){
-            startBattle.setVisibility(View.VISIBLE);
-        }
-        startBattle.setOnClickListener(this);
         choosePlayers.setOnClickListener(this);
 
         return v;

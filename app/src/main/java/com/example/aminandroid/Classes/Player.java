@@ -1,7 +1,5 @@
 package com.example.aminandroid.Classes;
 
-import java.util.Arrays;
-
 public class Player {
 
     private String pid; // Player Id
@@ -151,16 +149,12 @@ public class Player {
     @Override
     public String toString() {
         return "Player{" +
-                "pid='" + pid + '\'' +
-                ", tid='" + tid + '\'' +
-                ", name='" + name + '\'' +
                 ", pace=" + pace +
                 ", shooting=" + shooting +
                 ", passing=" + passing +
                 ", dribbling=" + dribbling +
                 ", defense=" + defense +
                 ", Physical=" + physical +
-                ", player_img=" + Arrays.toString(player_img) +
                 '}';
     }
 

@@ -40,7 +40,7 @@ public class PickPlayerOrTeamActivity extends AppCompatActivity implements View.
     PlayerAdapter playerAdapter;
     Button choose,goBack,confirm;
     TextView pick1,pick2;
-    String player,team,playerName,pick1_id,pick2_id,info;
+    String player,team,playerName,teamName,pick1_id,pick2_id,info;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,15 +55,15 @@ public class PickPlayerOrTeamActivity extends AppCompatActivity implements View.
         pick1 = findViewById(R.id.pick_1);
         pick2 = findViewById(R.id.pick_2);
 
+        choose.setOnClickListener(this);
+        goBack.setOnClickListener(this);
+        confirm.setOnClickListener(this);
 
         info = getIntent().getStringExtra("info");
         if(info.equals("player")){
             players = new ArrayList<>();
             playerAdapter = new PlayerAdapter(this, players);
             recyclerView.setAdapter(playerAdapter);
-            choose.setOnClickListener(this);
-            goBack.setOnClickListener(this);
-            confirm.setOnClickListener(this);
             fillPlayerInfo();
 
             BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
@@ -83,6 +83,15 @@ public class PickPlayerOrTeamActivity extends AppCompatActivity implements View.
             teamsAdapter = new TeamAdapter(this, teams);
             recyclerView.setAdapter(teamsAdapter);
             fillTeamInfo();
+
+            BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+                @Override
+                public void onReceive(Context context, Intent intent) {
+                    team = intent.getStringExtra("team");
+                }
+            };
+            LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,new IntentFilter("message_subject_intent"));
+
         }
     }
     public void fillPlayerInfo() {
@@ -120,7 +129,8 @@ public class PickPlayerOrTeamActivity extends AppCompatActivity implements View.
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot ds : snapshot.getChildren()) {
-                    teams.add(new Team(String.valueOf(ds.child("name").getValue()),
+                    teams.add(new Team(String.valueOf(ds.child("tid").getValue()),
+                            String.valueOf(ds.child("name").getValue()),
                             parseInt(String.valueOf(ds.child("championships").getValue())),
                             parseInt(String.valueOf(ds.child("establishment").getValue()))));
                 }
@@ -168,8 +178,39 @@ public class PickPlayerOrTeamActivity extends AppCompatActivity implements View.
                 });
 
             }
-            else {
-                Toast.makeText(PickPlayerOrTeamActivity.this, "Click on the player you want to choose", Toast.LENGTH_SHORT).show();
+            else if (team != null)
+            {
+                mDatabase.child("Teams").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot ds : snapshot.getChildren()) {
+                            if(team.equals(ds.getKey()))
+                                teamName = String.valueOf(ds.child("name").getValue());
+                        }
+                        if (pick1.getText().toString().equals("Team 1")) {
+                            pick1.setText(teamName);
+                            pick1_id = team;
+                        } else if (pick2.getText().toString().equals("Team 2") && !teamName.equals(pick1.getText().toString())) {
+                            pick2.setText(teamName);
+                            pick2_id = team;
+                        }
+                        else if(teamName.equals(pick1.getText().toString())){
+                            Toast.makeText(PickPlayerOrTeamActivity.this, "Please Pick A Different Team", Toast.LENGTH_SHORT).show();
+                        } else if(!pick2.getText().toString().equals("Team 2")) {
+                            Toast.makeText(PickPlayerOrTeamActivity.this, "You already picked two Teams", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            } else {
+                if(info.equals("team"))
+                    Toast.makeText(PickPlayerOrTeamActivity.this, "Click on the team you want to choose", Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(PickPlayerOrTeamActivity.this, "Click on the player you want to choose", Toast.LENGTH_SHORT).show();
             }
 
 
@@ -183,10 +224,18 @@ public class PickPlayerOrTeamActivity extends AppCompatActivity implements View.
                i.putExtra("info",info);
                startActivity(i);
             }
-            else{
-                Toast.makeText(PickPlayerOrTeamActivity.this, "Click on the players you want to choose", Toast.LENGTH_SHORT).show();
+            else {
+                if(info.equals("team"))
+                    Toast.makeText(PickPlayerOrTeamActivity.this, "Click on the team you want to choose", Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(PickPlayerOrTeamActivity.this, "Click on the player you want to choose", Toast.LENGTH_SHORT).show();
             }
         }
+        else{
+            Intent i = new Intent(PickPlayerOrTeamActivity.this, MainActivity.class);
+            startActivity(i);
+        }
     }
+
 
 }

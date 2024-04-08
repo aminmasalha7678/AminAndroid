@@ -8,9 +8,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.aminandroid.Classes.Team;
+import com.example.aminandroid.PickPlayerOrTeamActivity;
 import com.example.aminandroid.R;
 
 import java.util.List;
@@ -35,9 +37,12 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.TeamViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull TeamViewHolder holder, int position) {
+
+
         String name = "Name: " + TeamInfoList.get(position).getName();
         String establishment = "Establishment: " + TeamInfoList.get(position).getEstablishment();
         String championships = "Championships: " + TeamInfoList.get(position).getChampionships();
+
         tid = TeamInfoList.get(position).getTid();
 
         holder.TeamName.setText(name);
@@ -61,16 +66,23 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.TeamViewHolder
             TeamChampionships = itemView.findViewById(R.id.list_player_age);
             TeamEstablishment = itemView.findViewById(R.id.list_player_points);
             TeamId = "";
-            if(itemView.getContext() instanceof AdminActivity)
-                itemView.setOnClickListener(this);
+
+            itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-            Intent i = new Intent(v.getContext(), UpdateActivity.class);
-            i.putExtra("id",TeamId);
-            i.putExtra("info","Team");
-            v.getContext().startActivity(i);
+            if(itemView.getContext() instanceof AdminActivity) {
+                Intent i = new Intent(v.getContext(), UpdateActivity.class);
+                i.putExtra("id", TeamId);
+                i.putExtra("info", "Team");
+                v.getContext().startActivity(i);
+            }
+             else if(itemView.getContext() instanceof PickPlayerOrTeamActivity){
+                Intent intent = new Intent("message_subject_intent");
+                intent.putExtra("team" ,TeamId);
+                LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+            }
         }
     }
 }
