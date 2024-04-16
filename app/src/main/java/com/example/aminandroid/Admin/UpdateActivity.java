@@ -41,6 +41,7 @@ public class UpdateActivity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update);
+        //define variables used in the activity
         id = getIntent().getStringExtra("id");
         info = getIntent().getStringExtra("info");
         playerPace = findViewById(R.id.update_player_pac);
@@ -60,6 +61,7 @@ public class UpdateActivity extends AppCompatActivity implements View.OnClickLis
         goBack = findViewById(R.id.goback_button);
         mDatabase = FirebaseDatabase.getInstance("https://aminandroid-45afc-default-rtdb.europe-west1.firebasedatabase.app/").getReference();
 
+        //sets up positions info to use in the adapter
         positions = new ArrayList<String>();
 
         positions.add("C");
@@ -68,12 +70,14 @@ public class UpdateActivity extends AppCompatActivity implements View.OnClickLis
         positions.add("SG");
         positions.add("PG");
 
+        //sets up the positions adapter for the spinner view playerPosition
         ArrayAdapter<String> positionAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, positions);
         positionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         playerPosition.setAdapter(positionAdapter);
 
         playerPosition.setOnItemSelectedListener(this);
 
+        //checks if the object being updated is a team or a player and sets the visibility of views based on which one
         if(info.equals("Team")){
             teamChampions.setVisibility(View.VISIBLE);
             teamYear.setVisibility(View.VISIBLE);
@@ -101,6 +105,7 @@ public class UpdateActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         Intent i = new Intent(v.getContext(),AdminActivity.class);
         if (v.getId() == R.id.delete_button){
+            //deletes the object from firebase
             if (info.equals("Team")){
                 mDatabase.child("Teams").child(id).removeValue();
             }
@@ -109,6 +114,7 @@ public class UpdateActivity extends AppCompatActivity implements View.OnClickLis
             }
         }
         else if (v.getId() == R.id.update_button) {
+            //updates the objects values in firebase
            if (info.equals("Team")){
                 mDatabase.child("Teams").child(id).setValue(new Team(id,
                         name.getText().toString(),
@@ -132,18 +138,20 @@ public class UpdateActivity extends AppCompatActivity implements View.OnClickLis
 
     }
     private void fillTeamsNameAndId(){
-
+        //fills the teams names for the playerTeam spinner
         teamNames = new ArrayList<String>();
         teamId = new ArrayList<String>();
         mDatabase.child("Teams").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot ds : snapshot.getChildren()) {
+                    //adds each team name and id to the name and id arraylists
                     String name = String.valueOf(ds.child("name").getValue());
                     String id = String.valueOf(ds.child("tid").getValue());
                     teamNames.add(name);
                     teamId.add(id);
                 }
+                //sets up the playerTeam spinner by setting up and filling the information in an adapter
                 ArrayAdapter<String> adapter = new ArrayAdapter<>(UpdateActivity.this, android.R.layout.simple_spinner_dropdown_item, teamNames);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 playerTeam.setAdapter(adapter);
@@ -165,7 +173,8 @@ public class UpdateActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int i, long id) {
         if(view != null) {
-            if (parent.getId() == R.id.add_admin_player_team)
+            //checks which spinner is being used the positions or the player_team
+            if (parent.getId() == R.id.update_player_team)
                 selectedId = teamId.get(i);
             else
                 position = positions.get(i);

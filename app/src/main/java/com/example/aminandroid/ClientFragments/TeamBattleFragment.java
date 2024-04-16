@@ -36,6 +36,7 @@ public class TeamBattleFragment extends Fragment implements View.OnClickListener
 
     @Override
     public void onClick(View v) {
+        //sends info "player" to PickPlayerOrTeamActivity
         if(v.getId() == chooseTeams.getId()){
             Intent i = new Intent(v.getContext(), PickPlayerOrTeamActivity.class);
             i.putExtra("info","team");

@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -50,6 +49,7 @@ public class PlayerFragment extends Fragment {
         return v;
     }
     public void fillPlayerInfo() {
+        //puts the information of each player in a list to put in an adapter later
         mDatabase.child("Players").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -65,6 +65,7 @@ public class PlayerFragment extends Fragment {
                             parseInt(String.valueOf(ds.child("physical").getValue())),
                             String.valueOf(ds.child("position").getValue())));
                 }
+                //notifies the adapter that the data of the players list is updated
                 adapter.notifyDataSetChanged();
 
 

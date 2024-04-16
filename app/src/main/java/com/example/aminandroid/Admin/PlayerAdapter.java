@@ -27,11 +27,13 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.PlayerView
     String pid;
 
     public PlayerAdapter(Context context,List<Player> PlayersInfoList){
+        //defines the context of the adapter and sets the info of the players up for later use
         this.context = context;
         this.PlayersInfoList = PlayersInfoList;
     }
     @Override
     public PlayerViewHolder onCreateViewHolder(ViewGroup parent, int i) {
+        //shows an item aka player card
         View view = LayoutInflater.from(context).inflate(R.layout.player_card, parent, false);
         return new PlayerViewHolder(view);
 
@@ -39,6 +41,7 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.PlayerView
 
     @Override
     public void onBindViewHolder(@NonNull PlayerViewHolder holder, int position) {
+        //defines each player attributes
         String name = PlayersInfoList.get(position).getName();
         String pac = String.valueOf(PlayersInfoList.get(position).getPace());
         String sho = String.valueOf(PlayersInfoList.get(position).getShooting());
@@ -48,9 +51,9 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.PlayerView
         String phy = String.valueOf(PlayersInfoList.get(position).getPhysical());
         String overall = String.valueOf(PlayersInfoList.get(position).getOverall());
         String pos = PlayersInfoList.get(position).getPosition();
-
         pid = PlayersInfoList.get(position).getPid();
 
+        //sets each players attributes to the corresponding place in the player card
         holder.playerName.setText(name);
         holder.playerPac.setText(pac);
         holder.playerSho.setText(sho);
@@ -76,6 +79,7 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.PlayerView
 
         public PlayerViewHolder(@NonNull View itemView) {
             super(itemView);
+            // define every view in the player_card xml
             constraintLayout = itemView.findViewById(R.id.card_layout);
             card = itemView.findViewById(R.id.card);
             playerName = itemView.findViewById(R.id.player_card_name);
@@ -91,7 +95,7 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.PlayerView
 
 
             itemView.setOnClickListener(this);
-
+            //checks if the item is inside PickPlayerOrTeamActivity and changes the constraints for the picture for the design
             if(itemView.getContext() instanceof PickPlayerOrTeamActivity) {
                 ConstraintSet constraintSet = new ConstraintSet();
                 constraintSet.clone(constraintLayout);
@@ -104,12 +108,14 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.PlayerView
         @Override
         public void onClick(View v) {
             if(itemView.getContext() instanceof AdminActivity) {
+                //sends the user to updateActivity to update the players info
                 Intent i = new Intent(v.getContext(), UpdateActivity.class);
                 i.putExtra("id", playerId);
                 i.putExtra("info", "Player");
                 v.getContext().startActivity(i);
             }
             else if(itemView.getContext() instanceof PickPlayerOrTeamActivity){
+                //sends to PickPlayerOrTeamActivity the players id
                 Intent intent = new Intent("message_subject_intent");
                 intent.putExtra("player" ,playerId);
                 LocalBroadcastManager.getInstance(context).sendBroadcast(intent);

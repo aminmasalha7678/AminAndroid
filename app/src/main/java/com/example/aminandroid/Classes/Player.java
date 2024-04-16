@@ -13,22 +13,8 @@ public class Player {
     private int defense;
     private int physical;
     private String position;
-    private Byte[] player_img;
 
-    public Player(String pid, String tid, String name, int pace, int shooting, int passing, int dribbling, int defense, int physical,String position, Byte[] player_img) {
-        this.pid = pid;
-        this.tid = tid;
-        this.name = name;
-        this.pace = pace;
-        this.shooting = shooting;
-        this.passing = passing;
-        this.dribbling = dribbling;
-        this.defense = defense;
-        this.physical = physical;
-        this.player_img = player_img;
-        this.position = position;
-        this.overall = (this.shooting+this.pace+this.passing+this.dribbling+this.defense+this.physical)/6;
-    }
+
     public Player(String pid, String tid, String name, int pace, int shooting, int passing, int dribbling, int defense, int physical,String position) {
         this.pid = pid;
         this.tid = tid;
@@ -57,95 +43,35 @@ public class Player {
 
 
     public int getOverall(){ return (this.shooting+this.pace+this.passing+this.dribbling+this.defense+this.physical)/6; }
-
     public String getPid() {
         return pid;
     }
-
     public void setPid(String pid) {
         this.pid = pid;
     }
-
-    public String getTid() {
-        return tid;
-    }
-
-    public void setTid(String tid) {
-        this.tid = tid;
-    }
-
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
-
     public int getPace() {
         return pace;
     }
-
-    public void setPace(int pace) {
-        this.pace = pace;
-    }
-
     public int getShooting() {
         return shooting;
     }
-
-    public void setShooting(int shooting) {
-        this.shooting = shooting;
-    }
-
     public int getPassing() {
         return passing;
     }
-
-    public void setPassing(int passing) {
-        this.passing = passing;
-    }
-
     public int getDribbling() {
         return dribbling;
     }
-
-    public void setDribbling(int dribbling) {
-        this.dribbling = dribbling;
-    }
-
     public int getDefense() {
         return defense;
     }
-
-    public void setDefense(int defense) {
-        this.defense = defense;
-    }
-
-    public int getPhysical() {
-        return physical;
-    }
-
-    public void setPhysical(int physical) {
-        this.physical = physical;
-    }
-
-    public String getPosition() {
-        return position;
-    }
-
-    public void setPosition(String position) {
-        this.position = position;
-    }
-
-    public Byte[] getPlayer_img() {
-        return player_img;
-    }
-
-    public void setPlayer_img(Byte[] player_img) {
-        this.player_img = player_img;
-    }
-
+    public int getPhysical() { return physical; }
+    public String getPosition() { return position; }
     @Override
     public String toString() {
         return "Player{" +
@@ -157,13 +83,13 @@ public class Player {
                 ", Physical=" + physical +
                 '}';
     }
-
-
     public int[] startGame(Player p2){
+        //begins game between players based on luck but gives better chance to the player with better overAll stats
         int[] scores = new int[2];
         int pick1_score = 0;
         int pick2_score = 0;
         int pick1_random,pick2_random;
+        //checks if the game ended by any of the players reaching 7 if not continues to increase players scores based on luck (but gives better chance to the player with better overAll stats)
         while(pick2_score != 7 && pick1_score != 7){
             pick1_random = (int) (Math.random()*this.getOverall());
             pick2_random = (int) (Math.random()*p2.getOverall());

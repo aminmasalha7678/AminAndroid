@@ -148,16 +148,24 @@ public class ConclusionActivity extends AppCompatActivity implements View.OnClic
                         }
                     }
 
-                    t1.startGame(t2);
+                    t1.startGame(t2, new Team.GameStartCallback() {
+                        @Override
+                        public void onGameStart(int[] scores) {
+                            pick1_score.setText(String.valueOf(scores[0]));
+                            pick2_score.setText(String.valueOf(scores[1]));
+                            if(scores[0]>scores[1]){
+                                winner = t1.getName();
+                            }
+                            else{
+                                winner = t2.getName();
+                            }
+                            sendRequest("write highlights no longer than 60 words for a fictional team vs team in basketball between" + t1.getName() + "and"+ t2.getName()+"this game is hypothetical do not include player names in the highlights "+"the team who won is"+ winner+"with a score of"+scores[0]+"to"+scores[1]
+                            );
+                        }
+                    });
 
-                    pick1_score.setText(String.valueOf(scores[0]));
-                    pick2_score.setText(String.valueOf(scores[1]));
-                    if(scores[0]>scores[1]){
-                        winner = t1.getName();
-                    }
-                    else{
-                        winner = t2.getName();
-                    }
+
+
 
                 }
 

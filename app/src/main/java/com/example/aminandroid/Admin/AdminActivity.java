@@ -32,7 +32,7 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
-
+        //defining variables
         Toolbar toolbar = findViewById(R.id.admin_toolbar);
         setSupportActionBar(toolbar);
         mAuth = FirebaseAuth.getInstance();
@@ -40,7 +40,7 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
         drawerLayout = findViewById(R.id.admin_drawer_layout);
         NavigationView navigationView = findViewById(R.id.admin_nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
+        //checks if user is null or dosen't start with a certain word if true the user is sent back to signup activity
         if (user == null || !user.getDisplayName().startsWith("admin: ")) {
             startActivity(new Intent(AdminActivity.this, SignupActivity.class));
         }
@@ -49,7 +49,7 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
                 R.string.close_nav);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
-
+        //checks if this is the first time opening the activity if true sets the fragment as admin home fragment
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.admin_fragment_container, new AdminHomeFragment()).commit();
             navigationView.setCheckedItem(R.id.admin_nav_home);
@@ -58,6 +58,7 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        //checks which Nav Item is selected and shows the fragment corresponding to the selected item
         if (item.getItemId() == R.id.admin_nav_home) {
             getSupportFragmentManager().beginTransaction().replace(R.id.admin_fragment_container, new AdminHomeFragment()).commit();
         } else if (item.getItemId() == R.id.admin_nav_team) {

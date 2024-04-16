@@ -1,5 +1,7 @@
 package com.example.aminandroid.ClientFragments;
 
+import static java.lang.Integer.parseInt;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,9 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.aminandroid.Admin.PlayerAdapter;
 import com.example.aminandroid.Admin.TeamAdapter;
-import com.example.aminandroid.Classes.Player;
 import com.example.aminandroid.Classes.Team;
 import com.example.aminandroid.R;
 import com.google.firebase.database.DataSnapshot;
@@ -23,8 +23,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static java.lang.Integer.parseInt;
 
 
 public class TeamFragment extends Fragment {
@@ -54,7 +52,7 @@ public class TeamFragment extends Fragment {
     }
 
     private void fillTeamInfo() {
-
+        //puts the information of each player in a list to put in an adapter later
         mDatabase.child("Teams").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
