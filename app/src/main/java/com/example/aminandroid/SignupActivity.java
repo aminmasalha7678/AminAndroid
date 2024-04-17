@@ -8,6 +8,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,7 +23,7 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 public class SignupActivity extends AppCompatActivity {
     EditText email,username,password,cpassword,adminCode;
     Switch Isadmin;
-    TextView error,goTo_login;
+    TextView goTo_login;
     Button signUpButton;
     private FirebaseAuth mAuth;
     @Override
@@ -33,7 +34,6 @@ public class SignupActivity extends AppCompatActivity {
         username = findViewById(R.id.signup_username);
         password = findViewById(R.id.signup_password);
         cpassword = findViewById(R.id.signup_cpassword);
-        error = findViewById(R.id.signup_error);
         Isadmin = findViewById(R.id.admin_switch);
         adminCode = findViewById(R.id.admin_code);
         mAuth = FirebaseAuth.getInstance();
@@ -73,30 +73,23 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     private void createNewAccount(){
-        error.setVisibility(View.GONE);
         if (email.getText().toString().equals("")){
-            error.setVisibility(View.VISIBLE);
-            error.setText("Please enter your email");
+            Toast.makeText(SignupActivity.this, "Please enter your email", Toast.LENGTH_SHORT).show();
         }
         else if(username.getText().toString().equals("")){
-            error.setVisibility(View.VISIBLE);
-            error.setText("Please enter your username");
+            Toast.makeText(SignupActivity.this, "Please enter your username", Toast.LENGTH_SHORT).show();
         }
         else if(username.getText().toString().startsWith("admin: ")){
-            error.setVisibility(View.VISIBLE);
-            error.setText("No.");
+            Toast.makeText(SignupActivity.this, "No.", Toast.LENGTH_SHORT).show();
         }
         else if(password.getText().toString().equals("")){
-            error.setVisibility(View.VISIBLE);
-            error.setText("Please enter your password");
+            Toast.makeText(SignupActivity.this, "Please enter your password", Toast.LENGTH_SHORT).show();
         }
         else if(!password.getText().toString().equals(cpassword.getText().toString())){
-            error.setVisibility(View.VISIBLE);
-            error.setText("password doesn't match");
+            Toast.makeText(SignupActivity.this, "password doesn't match", Toast.LENGTH_SHORT).show();
         }
         else if (Isadmin.isChecked() && !adminCode.getText().toString().equals("1")){
-            error.setVisibility(View.VISIBLE);
-            error.setText("admin code is incorrect");
+            Toast.makeText(SignupActivity.this, "admin code is incorrect", Toast.LENGTH_SHORT).show();
         }
         else{
             //sign-up with firebase
@@ -123,8 +116,7 @@ public class SignupActivity extends AppCompatActivity {
 
                             } else {
                                 // If sign in fails, display a message to the user.
-                                error.setVisibility(View.VISIBLE);
-                                error.setText("Email is already in use");
+                                Toast.makeText(SignupActivity.this, "Email is already in use", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });

@@ -79,6 +79,23 @@ public class UpdateActivity extends AppCompatActivity implements View.OnClickLis
 
         //checks if the object being updated is a team or a player and sets the visibility of views based on which one
         if(info.equals("Team")){
+            mDatabase.child("Teams").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot ds : snapshot.getChildren()) {
+                        if(ds.child("tid").getValue().toString().equals(id)){
+                            teamChampions.setText(ds.child("championships").getValue().toString());
+                            teamYear.setText(ds.child("establishment").getValue().toString());
+                            name.setText(ds.child("name").getValue().toString());
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
             teamChampions.setVisibility(View.VISIBLE);
             teamYear.setVisibility(View.VISIBLE);
         }
@@ -92,6 +109,43 @@ public class UpdateActivity extends AppCompatActivity implements View.OnClickLis
             playerPhysical.setVisibility(View.VISIBLE);
             playerPassing.setVisibility(View.VISIBLE);
             fillTeamsNameAndId();
+            mDatabase.child("Players").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot ds : snapshot.getChildren()) {
+                        if(ds.child("pid").getValue().toString().equals(id)){
+                            name.setText(ds.child("name").getValue().toString());
+                            playerPace.setText(ds.child("pace").getValue().toString());
+                            playerShooting.setText(ds.child("shooting").getValue().toString());
+                            playerDribbling.setText(ds.child("dribbling").getValue().toString());
+                            playerDefense.setText(ds.child("defense").getValue().toString());
+                            playerPhysical.setText(ds.child("physical").getValue().toString());
+                            playerPassing.setText(ds.child("passing").getValue().toString());
+                            ArrayAdapter<String> adapter = (ArrayAdapter<String>) playerPosition.getAdapter();
+                            if (adapter != null) {
+                                for (int i = 0; i < adapter.getCount(); i++) {
+                                    if (adapter.getItem(i).equals(ds.child("position").getValue().toString())) {
+                                        // Found the position matching the desired text
+                                        playerPosition.setSelection(i); // Set the Spinner to display the desired text
+                                    }
+                                }
+                            }
+                            for (int i = 0; i < teamId.size(); i++) {
+                                if (teamId.get(i).equals(ds.child("tid").getValue().toString())) {
+                                    // Found the position matching the desired text
+                                    playerTeam.setSelection(i); // Set the Spinner to display the desired text
+                                }
+                            }
+
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
 
         }
         update.setOnClickListener(this);

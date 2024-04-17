@@ -1,5 +1,6 @@
 package com.example.aminandroid.ClientFragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,7 +9,7 @@ import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.aminandroid.Admin.AdminFragments.ViewPlayersFragment;
+import com.example.aminandroid.PickPlayerOrTeamActivity;
 import com.example.aminandroid.R;
 
 public class GameFragment extends Fragment implements View.OnClickListener {
@@ -31,12 +32,16 @@ public class GameFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public void onClick(View view) {
-        if(view.getId() == playerBattle.getId()){
-            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new PlayerBattleFragment()).commit();
+    public void onClick(View v) {
+        if(v.getId() == playerBattle.getId()){
+            Intent i = new Intent(v.getContext(), PickPlayerOrTeamActivity.class);
+            i.putExtra("info","player");
+            startActivity(i);
         }
         else{
-            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new TeamBattleFragment()).commit();
+            Intent i = new Intent(v.getContext(), PickPlayerOrTeamActivity.class);
+            i.putExtra("info","team");
+            startActivity(i);
         }
     }
 }

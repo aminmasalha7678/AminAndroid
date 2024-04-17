@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,7 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
 
-    TextView goTo_signup,error;
+    TextView goTo_signup;
 
     EditText email,password;
 
@@ -31,7 +32,6 @@ public class LoginActivity extends AppCompatActivity {
         goTo_signup = findViewById(R.id.createacc);
         email = findViewById(R.id.email_login);
         password = findViewById(R.id.password_login);
-        error = findViewById(R.id.error_login);
         login_button = findViewById(R.id.login_button);
         mAuth = FirebaseAuth.getInstance();
 
@@ -52,12 +52,10 @@ public class LoginActivity extends AppCompatActivity {
 
     private void login() {
         if (email.getText().toString().equals("")){
-            error.setVisibility(View.VISIBLE);
-            error.setText("Please enter your email");
+            Toast.makeText(LoginActivity.this, "Please enter your email", Toast.LENGTH_SHORT).show();
         }
         else if(password.getText().toString().equals("")){
-            error.setVisibility(View.VISIBLE);
-            error.setText("Please enter your password");
+            Toast.makeText(LoginActivity.this, "Please enter your password", Toast.LENGTH_SHORT).show();
         }
         else{
             mAuth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString())
@@ -69,8 +67,8 @@ public class LoginActivity extends AppCompatActivity {
                                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
                             } else {
                                 // If sign in fails, display a message to the user.
-                                error.setVisibility(View.VISIBLE);
-                                error.setText("Email or Password are incorrect");
+                                Toast.makeText(LoginActivity.this, "Email or password are incorrect", Toast.LENGTH_SHORT).show();
+
                             }
                         }
                     });
