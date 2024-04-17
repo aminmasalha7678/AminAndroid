@@ -131,7 +131,7 @@ public class UpdateActivity extends AppCompatActivity implements View.OnClickLis
                         parseInt(playerDribbling.getText().toString()),
                         parseInt(playerDefense.getText().toString()),
                         parseInt(playerPhysical.getText().toString()),
-                        name.getText().toString()));
+                        playerPosition.getSelectedItem().toString()));
             }
         }
         startActivity(i);

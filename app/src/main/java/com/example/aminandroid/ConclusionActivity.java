@@ -42,7 +42,7 @@ public class ConclusionActivity extends AppCompatActivity implements View.OnClic
     TextView pick1_name, pick2_name, pick1_score, pick2_score, gameHighlights;
     OkHttpClient client;
     Button goBack;
-    String pick1_id, pick2_id, info, responseBody, winner;
+    String pick1_id, pick2_id, info, winner;
     Player p1, p2;
     Team t1, t2;
     int[] scores;
@@ -71,12 +71,12 @@ public class ConclusionActivity extends AppCompatActivity implements View.OnClic
 
         gameResults();
     }
-
     private void gameResults() {
         client = new OkHttpClient();
 
         if (info.equals("player")) {
             mDatabase.child("Players").addValueEventListener(new ValueEventListener() {
+                //gives the proper values for p1 (Player 1) and p2 (Player 2)
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     for (DataSnapshot ds : snapshot.getChildren()) {
@@ -106,6 +106,7 @@ public class ConclusionActivity extends AppCompatActivity implements View.OnClic
                             pick2_name.setText(p2.getName());
                         }
                     }
+
                     scores = p1.startGame(p2);
                     pick1_score.setText(String.valueOf(scores[0]));
                     pick2_score.setText(String.valueOf(scores[1]));
@@ -129,6 +130,7 @@ public class ConclusionActivity extends AppCompatActivity implements View.OnClic
         }
         else if (info.equals("team")) {
             mDatabase.child("Teams").addValueEventListener(new ValueEventListener() {
+                //gives the proper values for t1 (Team 1) and t2 (Team 2)
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     for (DataSnapshot ds : snapshot.getChildren()) {

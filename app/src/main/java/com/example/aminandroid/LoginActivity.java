@@ -1,8 +1,5 @@
 package com.example.aminandroid;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,11 +7,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -71,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
                             } else {
                                 // If sign in fails, display a message to the user.
                                 error.setVisibility(View.VISIBLE);
-                                error.setText(task.getException().getMessage());
+                                error.setText("Email or Password are incorrect");
                             }
                         }
                     });

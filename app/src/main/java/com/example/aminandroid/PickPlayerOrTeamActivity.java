@@ -29,12 +29,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class PickPlayerOrTeamActivity extends AppCompatActivity implements View.OnClickListener {
     DatabaseReference mDatabase;
-    List<Player> players;
-    List<Team> teams;
+    ArrayList<Player> players;
+    ArrayList<Team> teams;
     RecyclerView recyclerView;
     TeamAdapter teamsAdapter;
     PlayerAdapter playerAdapter;

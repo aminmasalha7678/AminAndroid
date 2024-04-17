@@ -22,14 +22,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class TeamFragment extends Fragment {
 
 
     DatabaseReference mDatabase;
-    List<Team> teams;
+    ArrayList<Team> teams;
     RecyclerView recyclerView;
     TeamAdapter adapter;
     @Override

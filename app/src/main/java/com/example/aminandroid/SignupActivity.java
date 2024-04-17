@@ -124,7 +124,7 @@ public class SignupActivity extends AppCompatActivity {
                             } else {
                                 // If sign in fails, display a message to the user.
                                 error.setVisibility(View.VISIBLE);
-                                error.setText(task.getException().getMessage());
+                                error.setText("Email is already in use");
                             }
                         }
                     });

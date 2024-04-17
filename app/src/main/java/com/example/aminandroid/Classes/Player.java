@@ -46,8 +46,9 @@ public class Player {
     public String getPid() {
         return pid;
     }
-    public void setPid(String pid) {
-        this.pid = pid;
+    public void setPid(String pid) { this.pid = pid; }
+    public String getTid() {
+        return tid;
     }
     public String getName() {
         return name;

@@ -15,15 +15,15 @@ import com.example.aminandroid.Classes.Team;
 import com.example.aminandroid.PickPlayerOrTeamActivity;
 import com.example.aminandroid.R;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.TeamViewHolder>{
 
-    List<Team> TeamInfoList;
+    ArrayList<Team> TeamInfoList;
     Context context;
     String tid;
 
-    public TeamAdapter(Context context,List<Team> TeamInfoList){
+    public TeamAdapter(Context context,ArrayList<Team> TeamInfoList){
         //defines the context of the adapter and sets the info of the teams up for later use
         this.context = context;
         this.TeamInfoList = TeamInfoList;

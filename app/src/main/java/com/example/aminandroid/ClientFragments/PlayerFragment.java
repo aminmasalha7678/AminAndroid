@@ -22,13 +22,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class PlayerFragment extends Fragment {
 
     DatabaseReference mDatabase;
-    List<Player> players;
+    ArrayList<Player> players;
     RecyclerView recyclerView;
     PlayerAdapter adapter;
 

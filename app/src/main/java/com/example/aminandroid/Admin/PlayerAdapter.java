@@ -18,15 +18,15 @@ import com.example.aminandroid.Classes.Player;
 import com.example.aminandroid.PickPlayerOrTeamActivity;
 import com.example.aminandroid.R;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.PlayerViewHolder>{
 
-    List<Player> PlayersInfoList;
+    ArrayList<Player> PlayersInfoList;
     Context context;
     String pid;
 
-    public PlayerAdapter(Context context,List<Player> PlayersInfoList){
+    public PlayerAdapter(Context context,ArrayList<Player> PlayersInfoList){
         //defines the context of the adapter and sets the info of the players up for later use
         this.context = context;
         this.PlayersInfoList = PlayersInfoList;

@@ -22,13 +22,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class ViewTeamsFragment extends Fragment {
 
     DatabaseReference mDatabase;
-    List<Team> Teams;
+    ArrayList<Team> Teams;
     TeamAdapter adapter;
     RecyclerView recyclerView;
     @Override
@@ -48,8 +47,7 @@ public class ViewTeamsFragment extends Fragment {
         return v;
     }
 
-    public List<Team> fillTeamInfo() {
-        List<Team> p = new ArrayList<>();
+    public void fillTeamInfo() {
         mDatabase.child("Teams").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -69,6 +67,5 @@ public class ViewTeamsFragment extends Fragment {
 
             }
         });
-        return p;
     }
 }
