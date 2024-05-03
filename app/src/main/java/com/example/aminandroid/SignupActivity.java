@@ -20,7 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 
-public class SignupActivity extends AppCompatActivity {
+public class SignupActivity extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
     EditText email,username,password,cpassword,adminCode;
     Switch Isadmin;
     TextView goTo_login;
@@ -40,37 +40,13 @@ public class SignupActivity extends AppCompatActivity {
         signUpButton = findViewById(R.id.signup_button);
         goTo_login = findViewById(R.id.alreadyHaveAcc);
         adminCode.setVisibility(View.GONE);
-        goTo_login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(SignupActivity.this, LoginActivity.class));
-            }
-        });
+        goTo_login.setOnClickListener(this);
 
-        signUpButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                createNewAccount();
-            }
-        });
-        Isadmin.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
-        {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
-            {
-                if (isChecked)
-                {
-                    adminCode.setVisibility(View.VISIBLE);
-                }
-                else {
-                    adminCode.setVisibility(View.GONE);
-                }
-
-
-            }
-        });
+        signUpButton.setOnClickListener(this);
+        Isadmin.setOnCheckedChangeListener(this);
 
     }
+
 
     private void createNewAccount(){
         if (email.getText().toString().equals("")){
@@ -121,5 +97,30 @@ public class SignupActivity extends AppCompatActivity {
                         }
                     });
         }
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v.getId() == R.id.alreadyHaveAcc)
+            startActivity(new Intent(SignupActivity.this,LoginActivity.class));
+        else
+            createNewAccount();
+
+
+    }
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        if (isChecked)
+        {
+            adminCode.setVisibility(View.VISIBLE);
+        }
+        else {
+            adminCode.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+        super.onPointerCaptureChanged(hasCapture);
     }
 }

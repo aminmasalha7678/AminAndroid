@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.aminandroid.Classes.Player;
+import com.example.aminandroid.Classes.PlayersCallback;
 import com.example.aminandroid.Classes.Team;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,6 +27,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -150,7 +152,7 @@ public class ConclusionActivity extends AppCompatActivity implements View.OnClic
                         }
                     }
 
-                    t1.startGame(t2, new Team.GameStartCallback() {
+                    t1.startGame(t2, new PlayersCallback() {
                         @Override
                         public void onGameStart(int[] scores) {
                             pick1_score.setText(String.valueOf(scores[0]));
@@ -164,6 +166,18 @@ public class ConclusionActivity extends AppCompatActivity implements View.OnClic
                             sendRequest("write highlights no longer than 60 words for a fictional team vs team in basketball between" + t1.getName() + "and"+ t2.getName()+"this game is hypothetical do not include player names in the highlights "+"the team who won is"+ winner+"with a score of"+scores[0]+"to"+scores[1]
                             );
                         }
+                        @Override
+                        public void onCallback(ArrayList<Player> players) {
+
+                        }
+
+                        @Override
+                        public void onCallback(Player[] players) {
+
+                        }
+
+
+
                     });
 
 

@@ -24,7 +24,6 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.PlayerView
 
     ArrayList<Player> PlayersInfoList;
     Context context;
-    String pid;
 
     public PlayerAdapter(Context context,ArrayList<Player> PlayersInfoList){
         //defines the context of the adapter and sets the info of the players up for later use
@@ -51,7 +50,7 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.PlayerView
         String phy = String.valueOf(PlayersInfoList.get(position).getPhysical());
         String overall = String.valueOf(PlayersInfoList.get(position).getOverall());
         String pos = PlayersInfoList.get(position).getPosition();
-        pid = PlayersInfoList.get(position).getPid();
+        String pid = PlayersInfoList.get(position).getPid();
 
         //sets each players attributes to the corresponding place in the player card
         holder.playerName.setText(name);

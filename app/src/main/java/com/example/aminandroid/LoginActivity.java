@@ -16,7 +16,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     TextView goTo_signup;
 
@@ -35,19 +35,8 @@ public class LoginActivity extends AppCompatActivity {
         login_button = findViewById(R.id.login_button);
         mAuth = FirebaseAuth.getInstance();
 
-        login_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                login();
-            }
-        });
-
-        goTo_signup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(LoginActivity.this, SignupActivity.class));
-            }
-        });
+        login_button.setOnClickListener(this);
+        goTo_signup.setOnClickListener(this);
     }
 
     private void login() {
@@ -74,5 +63,13 @@ public class LoginActivity extends AppCompatActivity {
                     });
 
         }
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v.getId() == R.id.login_button)
+            login();
+        else
+            startActivity(new Intent(LoginActivity.this, SignupActivity.class));
     }
 }

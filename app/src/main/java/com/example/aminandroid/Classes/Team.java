@@ -63,20 +63,13 @@ public class Team{
         return "Team{" +
                 ", name='" + name + '\'' +
                 ", championships=" + championships +
+                ", establishment year=" + establishment +
                 '}';
     }
 
 
     //interfaces because one method is asynchronous and cant be used without them
-    public interface PlayersCallback {
-        void onCallback(ArrayList<Player> players);
-    }
-    public interface BestPlayersCallback {
-        void onCallback(Player[] players);
-    }
-    public interface GameStartCallback {
-        void onGameStart(int[] scores);
-    }
+
     public void getAllTeamPlayers(PlayersCallback callback) {
         ArrayList<Player> allPlayers = new ArrayList<>();
         final String t1Tid = this.getTid();
@@ -113,7 +106,7 @@ public class Team{
             }
         });
     }
-    public void getBestTeamPlayers(BestPlayersCallback callback){
+    public void getBestTeamPlayers(PlayersCallback callback){
         Player[] starterPlayers = new Player[5];
         this.getAllTeamPlayers(new PlayersCallback() {
             @Override
@@ -142,11 +135,21 @@ public class Team{
                 }
                 callback.onCallback(starterPlayers);
             }
+
+            @Override
+            public void onCallback(Player[] players) {
+
+            }
+
+            @Override
+            public void onGameStart(int[] scores) {
+
+            }
         });
 
 
     }
-    public void startGame(Team t2, GameStartCallback callback) {
+    public void startGame(Team t2, PlayersCallback callback) {
         int[] scores = new int[2];
         scores[0] = 60;
         scores[1] = 60;
@@ -154,7 +157,9 @@ public class Team{
         Team t1 = this;
 
         // Perform asynchronous operation on t1
-        this.getBestTeamPlayers(new BestPlayersCallback() {
+        this.getBestTeamPlayers(new PlayersCallback() {
+
+
             //increases the score of the first team based on the overall level of the players
             @Override
             public void onCallback(Player[] bestT1Team) {
@@ -168,12 +173,22 @@ public class Team{
                 // Proceed to the next asynchronous operation
                 performSecondAsyncOperation(t2, scores, callback);
             }
+
+            @Override
+            public void onGameStart(int[] scores) {
+
+            }
+            @Override
+            public void onCallback(ArrayList<Player> players) {
+
+            }
         });
     }
-    private void performSecondAsyncOperation(Team t2, int[] scores, GameStartCallback callback) {
+    private void performSecondAsyncOperation(Team t2, int[] scores, PlayersCallback callback) {
         //increases the score of the second team based on the overall level of the players
         // Perform asynchronous operation on t2
-        t2.getBestTeamPlayers(new BestPlayersCallback() {
+        t2.getBestTeamPlayers(new PlayersCallback() {
+
             @Override
             public void onCallback(Player[] bestT2Team) {
                 for (Player player : bestT2Team) {
@@ -185,6 +200,15 @@ public class Team{
 
                 // After both async operations are complete, invoke the callback with updated scores
                 callback.onGameStart(scores);
+            }
+
+            @Override
+            public void onGameStart(int[] scores) {
+
+            }
+            @Override
+            public void onCallback(ArrayList<Player> players) {
+
             }
         });
     }
