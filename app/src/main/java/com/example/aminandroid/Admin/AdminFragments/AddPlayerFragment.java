@@ -128,7 +128,7 @@ public class AddPlayerFragment extends Fragment implements View.OnClickListener,
             DatabaseReference pushPlayer = mDatabase.child("Players").push();
             player.setPid(pushPlayer.getKey());
             pushPlayer.setValue(player);
-            Toast.makeText(getContext(),"Player Added Succesfully",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(),"Player Added Successfully",Toast.LENGTH_SHORT).show();
             playerName.setText("");
             playerPace.setText("");
             playerShooting.setText("");

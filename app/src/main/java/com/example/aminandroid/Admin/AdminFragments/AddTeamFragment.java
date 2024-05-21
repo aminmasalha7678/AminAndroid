@@ -10,13 +10,10 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.aminandroid.Admin.AdminActivity;
 import com.example.aminandroid.Classes.Team;
 import com.example.aminandroid.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.ArrayList;
 
 
 public class AddTeamFragment extends Fragment implements View.OnClickListener {
@@ -52,7 +49,7 @@ public class AddTeamFragment extends Fragment implements View.OnClickListener {
             DatabaseReference pushTeam = mDatabase.child("Teams").push();
             team.setTid(pushTeam.getKey());
             pushTeam.setValue(team);
-            Toast.makeText(getContext(),"Team Added Succesfully",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(),"Team Added Successfully",Toast.LENGTH_SHORT).show();
             teamName.setText("");
             teamChampion.setText("");
             teamYear.setText("");
