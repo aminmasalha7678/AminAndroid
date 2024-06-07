@@ -95,9 +95,11 @@ public class AddPlayerFragment extends Fragment implements View.OnClickListener,
                     teamNames.add(name);
                     teamId.add(id);
                 }
-
-                if(teamId!=null) {
+                try {
                     adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, teamNames);
+                }
+                catch(RuntimeException e){
+
                 }
                 if(adapter != null) {
 
