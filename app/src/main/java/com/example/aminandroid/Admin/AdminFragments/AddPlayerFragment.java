@@ -38,6 +38,7 @@ public class AddPlayerFragment extends Fragment implements View.OnClickListener,
     ArrayList<String> teamNames,teamId,positions;
     String selectedId;
     String position;
+    ArrayAdapter<String> adapter;
 
 
     @Override
@@ -95,14 +96,18 @@ public class AddPlayerFragment extends Fragment implements View.OnClickListener,
                     teamId.add(id);
                 }
 
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, teamNames);
-                if(adapter != null)
-                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                playerTeam.setAdapter(adapter);
-                selectedId=teamId.get(0);
-                // Notify the adapter that the data set has changed
-                adapter.notifyDataSetChanged();
+                if(teamId!=null) {
+                    adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, teamNames);
+                }
+                if(adapter != null) {
 
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+                    playerTeam.setAdapter(adapter);
+                    selectedId = teamId.get(0);
+                    // Notify the adapter that the data set has changed
+                    adapter.notifyDataSetChanged();
+                }
                 // Set the listener after the adapter is set
                 playerTeam.setOnItemSelectedListener(AddPlayerFragment.this);
             }
