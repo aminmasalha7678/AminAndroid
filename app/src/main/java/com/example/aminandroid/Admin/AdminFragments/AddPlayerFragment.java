@@ -67,6 +67,7 @@ public class AddPlayerFragment extends Fragment implements View.OnClickListener,
         positions.add("SF");
         positions.add("SG");
         positions.add("PG");
+        position=positions.get(0);
 
         ArrayAdapter<String> positionAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, positions);
         positionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -98,7 +99,7 @@ public class AddPlayerFragment extends Fragment implements View.OnClickListener,
                 if(adapter != null)
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 playerTeam.setAdapter(adapter);
-
+                selectedId=teamId.get(0);
                 // Notify the adapter that the data set has changed
                 adapter.notifyDataSetChanged();
 
